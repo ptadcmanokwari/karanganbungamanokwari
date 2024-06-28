@@ -46,6 +46,15 @@ $routes->post('/admin/showhome_gallery', 'Admin::showhome_gallery');
 $routes->get('/admin/save_gallery', 'Admin::save_gallery');
 $routes->post('/admin/save_gallery', 'Admin::save_gallery');
 $routes->post('/admin/delete_gallery', 'Admin::delete_gallery');
+$routes->post('/admin/upload', 'Admin::upload');
+$routes->get('/admin/upload', 'Admin::upload');
+
+// Routes Testimonials
+$routes->get('/admin/testimonials', 'Admin::testimonials');
+$routes->post('/admin/save_testimonials', 'Admin::save_testimonials');
+$routes->post('/admin/status_testimonials', 'Admin::status_testimonials');
+$routes->get('/admin/save_testimonials', 'Admin::save_testimonials');
+$routes->post('/admin/delete_testimonials', 'Admin::delete_testimonials');
 
 // Page setting
 $routes->get('/admin/page-setting', 'Admin::page_setting');

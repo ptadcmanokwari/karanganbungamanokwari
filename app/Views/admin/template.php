@@ -104,6 +104,7 @@
         }
 
         /* gambar Produk */
+        #tabelTestimoni img,
         #tabelSlider img,
         #tabelGaleri img,
         #tabelProduk img {
@@ -113,6 +114,10 @@
 
         #panduanPanelAdmin i {
             margin-right: 10px !important;
+        }
+
+        div#galeriImage .dz-preview.dz-image-preview {
+            margin: 5px !important;
         }
     </style>
 
@@ -154,7 +159,6 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-
             <li class="<?= ($current_uri == 'products') ? 'mm-active' : '' ?>">
                 <a href="<?= base_url('admin/products'); ?>" aria-expanded="false">
                     <i class="bi bi-box-seam" style="font-size: 1.5rem;"></i>
@@ -167,7 +171,12 @@
                     <span>Galeri</span>
                 </a>
             </li>
-
+            <li class="<?= ($current_uri == 'testimonials') ? 'mm-active' : '' ?>">
+                <a href="<?= base_url('admin/testimonials'); ?>" aria-expanded="false">
+                    <i class="bi bi-chat-square-quote" style="font-size: 1.5rem;"></i>
+                    <span>Testimoni</span>
+                </a>
+            </li>
             <li class>
                 <a class="has-arrow" href="#" aria-expanded="false">
                     <i class="bi bi-gear" style="font-size: 1.5rem;"></i>
@@ -191,8 +200,8 @@
                     </li>
                 </ul>
             </li>
-            <li class="<?= ($current_uri == 'galeri') ? 'mm-active' : '' ?>">
-                <a href="<?= base_url(); ?>/logout" aria-expanded="false">
+            <li class="<?= ($current_uri == 'logout') ? 'mm-active' : '' ?>">
+                <a href="<?= base_url('logout'); ?>" aria-expanded="false">
                     <i class="bi bi-box-arrow-right" style="font-size: 1.5rem;"></i>
                     <span>Logout</span>
                 </a>

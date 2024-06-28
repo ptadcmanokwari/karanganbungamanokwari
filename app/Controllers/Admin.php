@@ -6,6 +6,8 @@ use App\Models\SliderModel;
 use App\Models\ProductsModel;
 use App\Models\GalleryModel;
 use App\Models\SettingsModel;
+use App\Models\TestimonialsModel;
+use App\Models\ImageModel;
 
 class Admin extends BaseController
 {
@@ -237,8 +239,8 @@ class Admin extends BaseController
 
             $data = [
                 'img' => $imgName,
-                'is_active' => $this->request->getPost('status') === 'active' ? 1 : 0,
-                'is_show_home' => $this->request->getPost('show_home') === 'show' ? 1 : 0,
+                'is_active' => $this->request->getPost('status') == 1 ? 1 : 0,
+                'is_show_home' => $this->request->getPost('show_home') == 1 ? 1 : 0,
                 'kategori' => $this->request->getPost('kategori'),
             ];
 
@@ -412,4 +414,114 @@ class Admin extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'File upload failed']);
         }
     }
+
+
+    // Testimonial 
+    public function testimonials()
+    {
+        $model = new TestimonialsModel();
+        $data['testimonials'] = $model->getTestimonials();
+        $data['title'] = 'Testimonial';
+        $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
+
+        return view('admin/testimonials', $data);
+    }
+
+    public function save_testimonials()
+    {
+        $model = new TestimonialsModel();
+        $file = $this->request->getFile('file');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $imgName = $file->getRandomName();
+            $file->move('uploads/testimonials/', $imgName);
+
+            $data = [
+                'gambar' => $imgName,
+                'is_active' => $this->request->getPost('status') == 1 ? 1 : 0,
+            ];
+
+            $model->insert($data);
+
+            return $this->response->setJSON(['success' => 'File uploaded successfully']);
+        }
+
+        return $this->response->setJSON(['error' => 'Failed to upload file']);
+    }
+
+    public function status_testimonials()
+    {
+        $model = new TestimonialsModel();
+        $id = $this->request->getPost('id');
+        $status = $this->request->getPost('status');
+
+        $model->update($id, ['is_active' => $status]);
+
+        return $this->response->setJSON(['success' => 'Status updated successfully']);
+    }
+
+    public function delete_testimonials()
+    {
+        $model = new TestimonialsModel();
+        $id = $this->request->getPost('id');
+
+        $testimonial = $model->find($id);
+        if ($testimonial) {
+            unlink('uploads/testimonials/' . $testimonial['gambar']); // perbaiki path penghapusan file
+            $model->delete($id);
+            return $this->response->setJSON(['success' => 'Testimonial deleted successfully']);
+        }
+
+        return $this->response->setJSON(['error' => 'Testimonial not found']);
+    }
+
+
+
+    // public function upload()
+    // {
+    //     $imageModel = new GalleryModel();
+
+    //     if ($this->request->getFile('file')->isValid()) {
+    //         $img = $this->request->getFile('file');
+    //         $fileName = $img->getRandomName();
+    //         $img->move(WRITEPATH . 'uploads/gallery/', $fileName);
+
+    //         $data = [
+    //             'img' => $fileName,
+    //             'kategori' => $this->request->getPost('kategori'),
+    //             'is_active' => $this->request->getPost('is_active'),
+    //             'is_show_home' => $this->request->getPost('is_show_home'),
+    //         ];
+
+    //         $imageModel->save($data);
+
+    //         return $this->response->setJSON(['success' => 'Gambar berhasil diunggah.']);
+    //     } else {
+    //         return $this->response->setJSON(['error' => 'Maaf, terjadi kesalahan saat mengunggah gambar.']);
+    //     }
+    // }
+
+    // public function save_gallery()
+    // {
+    //     $model = new GalleryModel();
+    //     $file = $this->request->getFile('file');
+
+    //     if ($file && $file->isValid() && !$file->hasMoved()) {
+    //         $imgName = $file->getRandomName();
+    //         $file->move('uploads/gallery/', $imgName);
+
+    //         $data = [
+    //             'img' => $imgName,
+    //             'is_active' => $this->request->getPost('status') == 1 ? 1 : 0,
+    //             'is_show_home' => $this->request->getPost('show_home') == 1 ? 1 : 0,
+    //             'kategori' => $this->request->getPost('kategori'),
+    //         ];
+
+    //         $model->insert($data);
+
+    //         return $this->response->setJSON(['success' => 'File uploaded successfully']);
+    //     }
+
+    //     return $this->response->setJSON(['error' => 'Failed to upload file']);
+    // }
 }

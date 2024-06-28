@@ -7,6 +7,7 @@ use App\Models\ProductsModel;
 use App\Models\GalleryModel;
 use App\Models\WebtextModel;
 use App\Models\SliderModel;
+use App\Models\TestimonialsModel;
 
 class Home extends BaseController
 {
@@ -31,6 +32,11 @@ class Home extends BaseController
 
         //section Welcome
         $data['textwelcome'] = $settings->getSettings('text-welcome')->getRow()->nilai;
+
+
+        $model = new TestimonialsModel();
+        $data['testimonials'] = $model->getActiveTestimonials();
+        $data['texttestimonials'] = $settings->getSettings('text-testimonials')->getRow()->nilai;
 
         //section produk
         $data['textproduk'] = $settings->getSettings('text-produk')->getRow()->nilai;
