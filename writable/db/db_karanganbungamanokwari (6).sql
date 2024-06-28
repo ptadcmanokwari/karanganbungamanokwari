@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2024 at 03:45 PM
+-- Generation Time: Jun 28, 2024 at 03:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -150,8 +150,9 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (59, '::1', 'kampret@gmail.com', 4, '2024-06-26 01:08:25', 1),
 (60, '::1', 'kampret@gmail.com', 4, '2024-06-26 01:17:42', 1),
 (61, '::1', 'kampret@gmail.com', 4, '2024-06-26 08:08:09', 1),
-(62, '::1', 'erwin@gmail.com', 5, '2024-06-27 08:06:11', 1),
-(63, '::1', 'erwin@gmail.com', 5, '2024-06-27 08:32:35', 1);
+(62, '::1', 'kampret@gmail.com', 4, '2024-06-27 07:42:18', 1),
+(63, '::1', 'kampret@gmail.com', 4, '2024-06-27 13:08:08', 1),
+(64, '::1', 'kampret@gmail.com', 4, '2024-06-27 23:57:15', 1);
 
 -- --------------------------------------------------------
 
@@ -242,20 +243,6 @@ CREATE TABLE `t_gallery` (
   `kategori` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `t_gallery`
---
-
-INSERT INTO `t_gallery` (`id`, `img`, `is_active`, `is_show_home`, `kategori`) VALUES
-(29, '1718844469_1161787fd51e634745c9.jpg', 0, 0, 'Ucapan Duka'),
-(30, '1718844469_2f3af99645ea888c967d.jpg', 1, 1, 'Ucapan Selamat'),
-(31, '1718844480_fee55e131802d7ec8bdc.jpg', 1, 1, 'Ucapan Duka'),
-(32, '1718844480_d1a3e214f1c0cbc765d8.jpg', 1, 1, 'Wedding'),
-(33, '1718844487_39f0607bc9dda03844e5.jpg', 1, 1, 'Ucapan Selamat'),
-(34, '1718844487_d46620272bceaf3ba5a1.jpg', 0, 1, 'Wedding'),
-(45, '1719389631_36c6a278fa2f3a289349.jpg', 0, 0, 'Bebas'),
-(46, '1719479465_7d278a57e11783a9e958.jpg', 0, 0, 'ad');
-
 -- --------------------------------------------------------
 
 --
@@ -275,7 +262,8 @@ CREATE TABLE `t_products` (
 --
 
 INSERT INTO `t_products` (`id`, `nama`, `gambar`, `harga`, `is_popular`) VALUES
-(22, 'Ucapan Selamat - uk. 200 x 110', '1719145654_7df481eeb93f601b2935.jpg', 'Rp. 2.500.000', 1),
+(21, 'Ucapan Happy Wedding', '1719474295_486d2e032e16f636abc2.jpg', '1.000.000', 1),
+(22, 'Ucapan Selamat - uk. 200 x 110', '1719145654_7df481eeb93f601b2935.jpg', '1.500.000', 1),
 (23, 'Ucapan Duka - uk. 90 x 60', '1719145663_41953fc9ad7461a2db86.jpg', '300.000', 0),
 (24, 'Ucapan Selamat - uk. 244 x 122', '1719145673_e277de5476f3e4bd21bd.jpg', '2.000.000', 1),
 (25, 'Ucapan Duka - uk. 244 x 122', '1719145683_eb9038613da1c4e2739b.jpg', '2.500.000', 0),
@@ -284,8 +272,7 @@ INSERT INTO `t_products` (`id`, `nama`, `gambar`, `harga`, `is_popular`) VALUES
 (28, 'Ucapan Duka - uk. 135 x 95', '1719145715_3f6a2c300c30c49a7419.jpg', '800.000', 1),
 (43, 'Ucapan Selamat dan Sukses - uk. 100 x 200', '1719371797_4770a8d5d82126a55fbf.jpg', '200.000', 1),
 (46, 'dewrerer', '1719374939_0833469ca23942bbacb5.png', '4343435345', 0),
-(47, 'ertertetreert', '1719376748_4d76ea04fa1642349728.jpg', '11111', 0),
-(48, 'Ucapan Hari Raya Natal ukuran 2M x 1M', '1719477583_9fbb1ca332c834a77864.jpg', 'Rp. 2.500.000', 0);
+(48, 'wereterdfgdfgd', '1719495022_51963b5157ebf9ec38ec.png', 'Rp. 1.500.000', 1);
 
 -- --------------------------------------------------------
 
@@ -307,7 +294,7 @@ INSERT INTO `t_settings` (`id`, `parameter`, `nilai`) VALUES
 (1, 'site-title', 'Karangan Bunga Manokwari'),
 (2, 'site-desc', 'Spesialis Bunga Papan Manokwari'),
 (3, 'instagram', 'karangan_bunga_manokwari'),
-(4, 'facebook', 'Karangan Bunga Manokwari'),
+(4, 'facebook', 'Karangan_Bunga_Manokwari'),
 (5, 'whatsapp', '+6282199190971'),
 (6, 'favicon', 'frontend/assets/img/settings/favicon_io/favicon.ico'),
 (7, 'favicon-apple', 'frontend/assets/img/settings/favicon_io/apple-touch-icon.png'),
@@ -321,8 +308,8 @@ INSERT INTO `t_settings` (`id`, `parameter`, `nilai`) VALUES
 (15, 'text-slider', 'Papan Bunga, Standing Flower, Bucket Bunga, Bunga Meja'),
 (16, 'alamat1', 'Latando, Jl. Yos Sudarso, Kab. Manokwari, Papua Barat 98312'),
 (17, 'alamat2', 'Jalan Poros Aimasi (Dekat Jembatan Aimasi) Distrik Prafi Kab. Manokwari'),
-(18, 'gambartoko1', 'uploads/sistem/1719420174_b19e91ec6f8906c2a2ba.png'),
-(19, 'gambartoko2', 'uploads/sistem/1719420179_30123f94dbf1382446b3.png'),
+(18, 'gambartoko1', 'uploads/sistem/1719496622_86c67f19ab1953287db8.png'),
+(19, 'gambartoko2', 'uploads/sistem/1719496618_07cc4eb11943bffe02d2.png'),
 (20, 'linkalamat1', 'https://maps.app.goo.gl/4yjbmWPxmNBR5MVB9'),
 (21, 'linkalamat2', 'https://maps.app.goo.gl/4yjbmWPxmNBR5MVB9'),
 (22, 'text-welcome', 'Jadikan setiap momen berharga dengan karangan bunga istimewa dari kami. Kami selalu berinovasi dan berkreasi untuk menciptakan rangkaian bunga yang menarik dan berkesan bagi Anda. Berikut ini beberapa jenis produk dan jasa yang kami tawarkan, segera pesan dan kami siap untuk melayani Anda.');
@@ -349,8 +336,18 @@ INSERT INTO `t_slider` (`id`, `title`, `subtitle`, `img`, `is_active`) VALUES
 (28, '', '', '1719371513_1af4b44bcf82211083e4.png', 1),
 (29, '', '', '1719371521_9ab312b60b4845607417.png', 1),
 (30, '', '', '1719377156_d62dd62e7715712edde4.png', 0),
-(31, '', '', '1719391571_f910b7df09fd0c6671d3.png', 0),
-(32, 'Tambah Judul Slider Baru', 'Tambah Subjudul Slider Baru', '1719480230_0f9487ba776b5df0a5fa.jpg', 0);
+(31, '', '', '1719391571_f910b7df09fd0c6671d3.png', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_testimoni`
+--
+
+CREATE TABLE `t_testimoni` (
+  `id` int(11) NOT NULL,
+  `gambar` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -483,6 +480,12 @@ ALTER TABLE `t_slider`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `t_testimoni`
+--
+ALTER TABLE `t_testimoni`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -510,7 +513,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -540,7 +543,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `t_gallery`
 --
 ALTER TABLE `t_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `t_products`
@@ -558,7 +561,13 @@ ALTER TABLE `t_settings`
 -- AUTO_INCREMENT for table `t_slider`
 --
 ALTER TABLE `t_slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `t_testimoni`
+--
+ALTER TABLE `t_testimoni`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
