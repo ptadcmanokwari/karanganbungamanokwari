@@ -553,7 +553,9 @@
                                 <a href="<?= base_url(); ?>uploads/gallery/<?= $listgaleri['img']; ?>"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
                                     <img src="<?= base_url(); ?>uploads/gallery/<?= $listgaleri['img']; ?>"
-                                        class="img-fluid" alt="">
+                                        class="img-fluid" alt=""
+                                        style="sa coba2 tp tra bs de pu ukuran msh kacau di galeri">
+
                                 </a>
                             </div>
                         </div>
