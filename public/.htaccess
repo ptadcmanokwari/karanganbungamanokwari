@@ -36,6 +36,12 @@ Options -Indexes
 	# Ensure Authorization header is passed along
 	RewriteCond %{HTTP:Authorization} .
 	RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+	php_value upload_max_filesize = 40M
+	php_value post_max_size = 40M
+	php_value max_file_uploads = 100
+	php_value max_execution_time = 300
+	php_value max_input_time = 300
 </IfModule>
 
 <IfModule !mod_rewrite.c>

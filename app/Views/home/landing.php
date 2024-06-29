@@ -706,11 +706,11 @@
                                         </div>
                                     </div><!-- End Info Item -->
                                     <div class="info-item d-flex mb-4" data-aos="fade-up" data-aos-delay="100">
-                                        <iframe
+                                        <!-- <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15957.477874618451!2d134.0664004!3d-0.859442!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d540b4bea091de9%3A0xbc127d1ab16c5502!2sMitra%20florist%20Manokwari!5e0!3m2!1sid!2sid!4v1718990853630!5m2!1sid!2sid"
                                             frameborder="0" style="border:0; width: 100%; height: 400px;"
                                             allowfullscreen="" loading="lazy"
-                                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                            referrerpolicy="no-referrer-when-downgrade"></iframe> -->
                                     </div><!-- End Info Item -->
                                 </div>
                                 <div class="col-lg-6">
@@ -722,11 +722,11 @@
                                         </div>
                                     </div><!-- End Info Item -->
                                     <div class="info-item d-flex mb-4" data-aos="fade-up" data-aos-delay="100">
-                                        <iframe
+                                        <!-- <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3989.3315242058134!2d133.85001507496506!3d-0.8950329990963015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMMKwNTMnNDIuMSJTIDEzM8KwNTEnMDkuMyJF!5e0!3m2!1sid!2sid!4v1719533240687!5m2!1sid!2sid"
                                             frameborder="0" style="border:0; width: 100%; height: 400px;"
                                             allowfullscreen="" loading="lazy"
-                                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                            referrerpolicy="no-referrer-when-downgrade"></iframe> -->
                                     </div><!-- End Info Item -->
                                 </div>
                             </div>
