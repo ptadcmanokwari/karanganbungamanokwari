@@ -37,6 +37,8 @@
     <link href="<?= base_url(); ?>frontend/assets/vendors/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="<?= base_url(); ?>frontend/assets/vendors/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
+
     <!-- Main CSS File -->
     <link href="<?= base_url(); ?>frontend/assets/css/main.css" rel="stylesheet">
 
@@ -307,7 +309,8 @@
                     foreach ($activeSliders as $index => $slide) : ?>
                     <div class="carousel-item <?= $index === 0 ? 'active' : ''; ?>"
                         data-bs-interval="<?= $intervalslider; ?>">
-                        <img src="<?= base_url('uploads/slider/' . $slide['img']); ?>" class="slider" alt="...">
+                        <img data-src="<?= base_url('uploads/slider/' . $slide['img']); ?>" class="lazyload slider"
+                            alt="Karangan Bunga Manokwari Spesialis Bunga Papan">
                     </div>
 
                     <?php $intervalslider += 2000;
@@ -368,7 +371,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <p>
+                                <p style="height: 130px;">
                                     <i class="bi bi-quote quote-icon-left"></i>
                                     <span>Ucapan Selamat dan Sukses, Selamat Atas Promosi Jabatan, Selamat Atas Kenaikan
                                         Pangkat, dll.</span>
@@ -377,7 +380,8 @@
                                 <a href="<?= base_url(); ?>section_welcome/UcapanSelamat.jpg"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
                                     <img src="<?= base_url(); ?>section_welcome/UcapanSelamat.jpg"
-                                        class="testimonial-img zoom-in" alt="Karangan Bunga Manokwari Ucapan Selamat dan
+                                        class="testimonial-img zoom-in"
+                                        style="height: 200px !important; object-fit: cover !important;" alt="Karangan Bunga Manokwari Ucapan Selamat dan
                                         Sukses, Selamat Atas Promosi Jabatan, Selamat Atas Kenaikan Pangkat"></a>
 
                                 <!-- <h3>Saul Goodman</h3>
@@ -389,7 +393,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <p>
+                                <p style="height: 130px;">
                                     <i class="bi bi-quote quote-icon-left"></i>
                                     <span>Ucapan Duka Cita, Bela Sungkawa, Turut Berduka Cita, Turut Berbela Sungkawa,
                                         dll </span>
@@ -397,7 +401,9 @@
                                 </p>
                                 <a href="<?= base_url(); ?>section_welcome/UcapanDuka.jpg"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                                    <img src="<?= base_url(); ?>section_welcome/UcapanDuka.jpg" class="testimonial-img"
+                                    <img src="<?= base_url(); ?>section_welcome/UcapanDuka.jpg"
+                                        class="testimonial-img zoom-in"
+                                        style="height: 200px !important; object-fit: cover !important;"
                                         alt="Karangan Bunga Manokwari Ucapan Duka Cita, Bela Sungkawa, Turut Berduka Cita, Turut Berbela Sungkawa">
                                 </a>
                                 <!-- <h3>Saul Goodman</h3>
@@ -407,7 +413,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <p>
+                                <p style="height: 130px;">
                                     <i class="bi bi-quote quote-icon-left"></i>
                                     <span>Ucapan Selamat Hari Ulang Tahun, Dirgahayu, Selamat Hari Jadi, Anniversary,
                                         dll.</span>
@@ -415,7 +421,9 @@
                                 </p>
                                 <a href="<?= base_url(); ?>section_welcome/UcapanHUT.jpg"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                                    <img src="<?= base_url(); ?>section_welcome/UcapanHUT.jpg" class="testimonial-img"
+                                    <img src="<?= base_url(); ?>section_welcome/UcapanHUT.jpg"
+                                        class="testimonial-img zoom-in"
+                                        style="height: 200px !important; object-fit: cover !important;"
                                         alt="Karangan Bunga Manokwari Ucapan Selamat Hari Ulang Tahun, Dirgahayu, Selamat Hari Jadi, Anniversary">
                                 </a>
                                 <!-- <h3>Saul Goodman</h3>
@@ -425,7 +433,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <p>
+                                <p style="height: 130px;">
                                     <i class="bi bi-quote quote-icon-left"></i>
                                     <span>Ucapan Selamat atas Peresmian suatu Kantor, Launching Bisnis, Pendirian Usaha,
                                         dll.</span>
@@ -434,7 +442,8 @@
                                 <a href="<?= base_url(); ?>section_welcome/UcapanLaunching.jpg"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
                                     <img src="<?= base_url(); ?>section_welcome/UcapanLaunching.jpg"
-                                        class="testimonial-img"
+                                        class="testimonial-img zoom-in"
+                                        style="height: 200px !important; object-fit: cover !important;"
                                         alt="Karangan Bunga Manokwari Ucapan Selamat atas Peresmian suatu Kantor, Launching Bisnis, Pendirian Usaha,">
                                 </a>
                                 <!-- <h3>Saul Goodman</h3>
@@ -462,7 +471,36 @@
                 <div class="row gy-4 justify-content-center">
                     <h2>Tentang Kami</h2>
                     <div class="col-lg-5">
-                        <img src="<?= base_url(); ?>frontend/assets/img/mitrafloristmkw.png" class="img-fluid" alt="">
+                        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img data-src="<?=$gambartoko1;?>" class="lazyload d-block w-100"
+                                        alt="Karangan Bunga Manokwari Spesialis Bunga Papan"
+                                        style="height: 400px !important; object-fit: cover !important;">
+                                </div>
+                                <div class="carousel-item">
+                                    <img data-src="<?=$gambartoko2;?>" class="lazyload d-block w-100"
+                                        alt="Karangan Bunga Manokwari Spesialis Bunga Papan"
+                                        style="height: 400px !important; object-fit: cover !important;">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="col-lg-7 content">
                         <div class="row">
@@ -500,15 +538,16 @@
                 <div class="row gy-4 mb-5">
                     <?php $no = 1;
                     foreach ($produk as $listproduk) { ?>
-                    <div class="portfolio-content col-lg-3 col-md-6 service-item d-flex flex-column px-3"
+                    <div class="portfolio-content col-lg-3 col-md-6 col-sm-6 col-6 service-item d-flex flex-column px-3"
                         data-aos="fade-right" data-aos-delay="100">
                         <a href="<?= base_url(); ?>uploads/products/<?= $listproduk['gambar']; ?>"
                             data-gallery="portfolio-gallery-app" class="glightbox preview-link">
                             <?php if ($listproduk['is_popular'] == 1) : ?>
                             <div class="popular-label">Terlaris !!!</div>
                             <?php endif; ?>
-                            <img src="<?= base_url(); ?>uploads/products/<?= $listproduk['gambar']; ?>"
-                                class="w-100 h-100 img-fluid" alt="<?= $listproduk['nama']; ?>"
+                            <img data-src="<?= base_url(); ?>uploads/products/<?= $listproduk['gambar']; ?>"
+                                class="lazyload w-100 h-100 img-fluid"
+                                alt="Karangan Bunga Manokwari <?= $listproduk['nama']; ?>"
                                 style="height: 200px !important; object-fit: cover !important;">
                         </a>
                         <div>
@@ -546,7 +585,7 @@
 
             <div class="container">
 
-                <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+                <div class="isotope-layout" data-default-filter="" data-layout="masonry" data-sort="original-order">
 
                     <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
                         <li data-filter="*" class="filter-active">All</li>
@@ -555,7 +594,8 @@
                             $listkategori_galerix = url_title($listkategori_galeri['kategori'], '-', true);
                         ?>
 
-                        <li data-filter=".filter-<?= $listkategori_galerix; ?>"><?= $listkategori_galeri['kategori']; ?>
+                        <li data-filter=".filter-<?= $listkategori_galerix; ?>">
+                            <?= $listkategori_galeri['kategori']; ?>
                         </li>
                         <?php $no++;
                         } ?>
@@ -566,21 +606,23 @@
                         foreach ($galeri as $listgaleri) {
                             $listgalerix = url_title($listgaleri['kategori'], '-', true);
                         ?>
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-<?= $listgalerix; ?>">
+                        <div class="col-6 col-lg-4 col-md-6 portfolio-item isotope-item filter-<?= $listgalerix; ?>">
                             <div class="portfolio-content h-100">
                                 <a href="<?= base_url(); ?>uploads/gallery/<?= $listgaleri['img']; ?>"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
                                     <img src="<?= base_url(); ?>uploads/gallery/<?= $listgaleri['img']; ?>"
-                                        class="img-fluid" alt="">
+                                        class="img-fluid" alt="Karangan Bungan Manokwari <?= $listgalerix; ?>">
 
                                 </a>
                             </div>
                         </div>
                         <?php } ?>
                     </div><!-- End Portfolio Container -->
-
                 </div>
-
+                <div class="col text-center">
+                    <a id="tombolPesan" class="btn btn-lg mt-3" href="<?=base_url();?>gallery" data-aos="fade-up">Galeri
+                        lainnya!</a>
+                </div>
             </div>
 
         </section><!-- /Galeri Section -->
@@ -624,9 +666,9 @@
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <a href="<?= base_url('uploads/testimonials/' . $testi['gambar']) ?>"
-                                    data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                                    <img src="<?= base_url('uploads/testimonials/' . $testi['gambar']) ?>"
-                                        class="testimonial-img zoom-in" alt="Testimonial Image">
+                                    data-gallery="portfolio-gallery-app" class="lazyload glightbox preview-link">
+                                    <img data-src="<?= base_url('uploads/testimonials/' . $testi['gambar']) ?>"
+                                        class="lazyload testimonial-img zoom-in" alt="Karangan Bunga Manokwari">
                                 </a>
                             </div>
                         </div>
@@ -706,11 +748,11 @@
                                         </div>
                                     </div><!-- End Info Item -->
                                     <div class="info-item d-flex mb-4" data-aos="fade-up" data-aos-delay="100">
-                                        <!-- <iframe
+                                        <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15957.477874618451!2d134.0664004!3d-0.859442!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d540b4bea091de9%3A0xbc127d1ab16c5502!2sMitra%20florist%20Manokwari!5e0!3m2!1sid!2sid!4v1718990853630!5m2!1sid!2sid"
                                             frameborder="0" style="border:0; width: 100%; height: 400px;"
                                             allowfullscreen="" loading="lazy"
-                                            referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </div><!-- End Info Item -->
                                 </div>
                                 <div class="col-lg-6">
@@ -722,11 +764,11 @@
                                         </div>
                                     </div><!-- End Info Item -->
                                     <div class="info-item d-flex mb-4" data-aos="fade-up" data-aos-delay="100">
-                                        <!-- <iframe
+                                        <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3989.3315242058134!2d133.85001507496506!3d-0.8950329990963015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMMKwNTMnNDIuMSJTIDEzM8KwNTEnMDkuMyJF!5e0!3m2!1sid!2sid!4v1719533240687!5m2!1sid!2sid"
                                             frameborder="0" style="border:0; width: 100%; height: 400px;"
                                             allowfullscreen="" loading="lazy"
-                                            referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </div><!-- End Info Item -->
                                 </div>
                             </div>

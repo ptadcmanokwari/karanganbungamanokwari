@@ -29,6 +29,8 @@ class Home extends BaseController
 
         //section tentang kami
         $data['texttentang'] = $settings->getSettings('text-tentang')->getRow()->nilai;
+        $data['gambartoko1'] = $settings->getSettings('gambartoko1')->getRow()->nilai;
+        $data['gambartoko2'] = $settings->getSettings('gambartoko2')->getRow()->nilai;
 
         //section Welcome
         $data['textwelcome'] = $settings->getSettings('text-welcome')->getRow()->nilai;
@@ -46,7 +48,7 @@ class Home extends BaseController
         //section galeri
         $data['textgaleri'] = $settings->getSettings('text-galeri')->getRow()->nilai;
         $gallery = new GalleryModel();
-        $data['galeri'] = $gallery->getGallery();
+        $data['galeri'] = $gallery->getGallery(1);
 
         $data['kategori_galeri'] = $gallery->getGalleryCategory();
 
@@ -61,5 +63,32 @@ class Home extends BaseController
         $data['linkalamat2'] = $settings->getSettings('linkalamat2')->getRow()->nilai;
 
         echo view('home/landing', $data);
+    }
+
+    public function gallery()
+    {
+        $data['current_uri'] = service('uri')->getSegment(1); // Get the first segment of the URI
+
+         //settingan secara umum
+         $settings = new SettingsModel();
+         $data['sitetitle'] = $settings->getSettings('site-title')->getRow()->nilai;
+         $data['sitedesc'] = $settings->getSettings('site-desc')->getRow()->nilai;
+         $data['textslider'] = $settings->getSettings('text-slider')->getRow()->nilai;
+         $data['favicon'] = $settings->getSettings('favicon')->getRow()->nilai;
+         $data['faviconapple'] = $settings->getSettings('favicon-apple')->getRow()->nilai;
+         $data['logo'] = $settings->getSettings('logo')->getRow()->nilai;
+         $data['whatsapp'] = $settings->getSettings('whatsapp')->getRow()->nilai;
+         $data['instagram'] = $settings->getSettings('instagram')->getRow()->nilai;
+         $data['facebook'] = $settings->getSettings('facebook')->getRow()->nilai;
+
+        //section galeri
+        $data['textgaleri'] = $settings->getSettings('text-galeri')->getRow()->nilai;
+        $gallery = new GalleryModel();
+        $data['galeri'] = $gallery->getGallery();
+
+        $data['kategori_galeri'] = $gallery->getGalleryCategory();
+
+        echo view('home/gallery', $data);
+
     }
 }

@@ -33,9 +33,12 @@
                                     <td><?= $index + 1 ?></td>
                                     <td>
                                         <div class="zoom-container">
-                                            <img class="w-100 zoom-in img-thumbnail"
-                                                src="<?= base_url('uploads/products/' . $category['gambar']) ?>"
-                                                alt="Kategori Image">
+                                            <a href="<?= base_url('uploads/products/' . $category['gambar']) ?>"
+                                                data-gallery="portfolio-gallery-app" class="glightbox preview-link">
+                                                <img class="w-100 zoom-in img-thumbnail"
+                                                    src="<?= base_url('uploads/products/' . $category['gambar']) ?>"
+                                                    alt="Kategori Image">
+                                            </a>
                                         </div>
                                     </td>
                                     <td><?= esc($category['nama']) ?></td>
@@ -161,6 +164,7 @@ Dropzone.autoDiscover = false;
 
 $(document).ready(function() {
 
+
     $('#tabelProduk').DataTable({
         "searching": false,
         "bStateSave": true,
@@ -215,6 +219,9 @@ $(document).ready(function() {
                             icon: 'success',
                             title: 'Berhasil',
                             text: 'Status telah berubah.',
+                            timer: 2000, // Auto-close after 3 seconds
+                            timerProgressBar: true,
+                            showConfirmButton: false // Hide the default "OK" button
                         });
                     },
                     error: function() {
@@ -222,6 +229,9 @@ $(document).ready(function() {
                             icon: 'error',
                             title: 'Gagal',
                             text: 'Status belum berubah.',
+                            timer: 2000, // Auto-close after 3 seconds
+                            timerProgressBar: true,
+                            showConfirmButton: false // Hide the default "OK" button
                         });
                     }
                 });
@@ -249,6 +259,9 @@ $(document).ready(function() {
                                     icon: 'success',
                                     title: 'Berhasil!',
                                     text: 'Produk telah dihapus.',
+                                    timer: 2000, // Auto-close after 3 seconds
+                                    timerProgressBar: true,
+                                    showConfirmButton: false // Hide the default "OK" button
                                 }).then(() => {
                                     location.reload();
                                 });
@@ -258,6 +271,9 @@ $(document).ready(function() {
                                     icon: 'error',
                                     title: 'Gagal',
                                     text: 'Produk belum dihapus.',
+                                    timer: 2000, // Auto-close after 3 seconds
+                                    timerProgressBar: true,
+                                    showConfirmButton: false // Hide the default "OK" button
                                 });
                             }
                         });
@@ -298,6 +314,9 @@ $(document).ready(function() {
                         icon: 'success',
                         title: 'Berhasil',
                         text: 'Produk baru telah diunggah.',
+                        timer: 2000, // Auto-close after 3 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false // Hide the default "OK" button
                     }).then(() => {
                         location.reload();
                     });
@@ -315,6 +334,9 @@ $(document).ready(function() {
                     icon: 'error',
                     title: 'Error',
                     text: 'Gagal unggah produk baru.',
+                    timer: 2000, // Auto-close after 3 seconds
+                    timerProgressBar: true,
+                    showConfirmButton: false // Hide the default "OK" button
                 });
             });
         }
@@ -353,6 +375,9 @@ $(document).ready(function() {
                                     icon: 'success',
                                     title: 'Berhasil',
                                     text: 'Produk telah diperbarui.',
+                                    timer: 2000, // Auto-close after 3 seconds
+                                    timerProgressBar: true,
+                                    showConfirmButton: false // Hide the default "OK" button
                                 }).then(() => {
                                     location.reload();
                                 });
@@ -363,6 +388,9 @@ $(document).ready(function() {
                                     text: response.errors ? Object.values(
                                             response.errors).join("<br>") :
                                         'Produk belum diperbarui.',
+                                    timer: 2000, // Auto-close after 3 seconds
+                                    timerProgressBar: true,
+                                    showConfirmButton: false // Hide the default "OK" button
                                 });
                             }
                         })
@@ -371,6 +399,9 @@ $(document).ready(function() {
                                 icon: 'error',
                                 title: 'Gagal',
                                 text: 'Produk belum diperbarui.',
+                                timer: 2000, // Auto-close after 3 seconds
+                                timerProgressBar: true,
+                                showConfirmButton: false // Hide the default "OK" button
                             });
                         });
                 }
@@ -391,6 +422,9 @@ $(document).ready(function() {
                         icon: 'success',
                         title: 'Berhasil',
                         text: 'Produk telah diperbarui.',
+                        timer: 2000, // Auto-close after 3 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false // Hide the default "OK" button
                     }).then(() => {
                         location.reload();
                     });
@@ -408,6 +442,9 @@ $(document).ready(function() {
                     icon: 'error',
                     title: 'Gagal',
                     text: 'Produk belum diperbarui.',
+                    timer: 2000, // Auto-close after 3 seconds
+                    timerProgressBar: true,
+                    showConfirmButton: false // Hide the default "OK" button
                 });
             });
         }

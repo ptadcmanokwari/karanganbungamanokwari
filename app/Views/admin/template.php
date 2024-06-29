@@ -7,12 +7,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <meta name="description" content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Kami menyediakan papan bunga dengan desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, ucapan duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
-    <meta name="keywords" content="karangan papan bunga, jasa pembuatan bunga papan, desain papan bunga, papan bunga pernikahan, papan bunga ucapan selamat, papan bunga duka cita, bunga papan murah">
+    <meta name="description"
+        content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Kami menyediakan papan bunga dengan desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, ucapan duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
+    <meta name="keywords"
+        content="karangan papan bunga, jasa pembuatan bunga papan, desain papan bunga, papan bunga pernikahan, papan bunga ucapan selamat, papan bunga duka cita, bunga papan murah">
     <meta name="author" content="Karangan Bunga Manokwari">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Karangan Bunga Manokwari">
-    <meta property="og:description" content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, acara duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
+    <meta property="og:description"
+        content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, acara duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
     <meta property="og:image" content="<?= base_url(); ?>uploads/karanganbungamanokwari.jpg">
     <meta property="og:url" content="https://karanganbungamanokwari.com">
     <meta property="og:type" content="website">
@@ -52,73 +55,76 @@
 
     <link rel="stylesheet" href="<?= base_url(); ?>backend/css/style1.css" />
     <link rel="stylesheet" href="<?= base_url(); ?>backend/css/colors/default.css" id="colorSkinCSS">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" rel="stylesheet">
 
     <!-- Swall -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css"
+        rel="stylesheet">
+    <link href="<?= base_url(); ?>frontend/assets/vendors/glightbox/css/glightbox.min.css" rel="stylesheet">
     <style>
-        .sidebar #sidebar_menu li.mm-active>a {
-            color: #1f253a;
-            font-weight: bold;
-        }
+    .sidebar #sidebar_menu li.mm-active>a {
+        color: #1f253a;
+        font-weight: bold;
+    }
 
-        .dropzone {
-            border: 2px dashed #007bff;
-            border-radius: 5px;
-            background: white;
-        }
+    .dropzone {
+        border: 2px dashed #007bff;
+        border-radius: 5px;
+        background: white;
+    }
 
-        div#sliderImage {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    div#sliderImage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        i.bi.bi-grid-fill.ml-2 {
-            margin: 0 !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    i.bi.bi-grid-fill.ml-2 {
+        margin: 0 !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        /* Slider, galeri, produk */
-        .zoom-container {
-            overflow: hidden;
-            width: 100%;
-            /* height: 230px; */
-            position: relative;
-        }
+    /* Slider, galeri, produk */
+    .zoom-container {
+        overflow: hidden;
+        width: 100%;
+        /* height: 230px; */
+        position: relative;
+    }
 
-        .zoom-in {
-            transition: transform 0.3s ease;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    .zoom-in {
+        transition: transform 0.3s ease;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-        .zoom-in:hover {
-            transform: scale(1.5);
-        }
+    .zoom-in:hover {
+        transform: scale(1.5);
+    }
 
-        /* gambar Produk */
-        #tabelTestimoni img,
-        #tabelSlider img,
-        #tabelGaleri img,
-        #tabelProduk img {
-            height: 150px !important;
-            object-fit: cover;
-        }
+    /* gambar Produk */
+    #tabelTestimoni img,
+    #tabelSlider img,
+    #tabelGaleri img,
+    #tabelProduk img {
+        height: 150px !important;
+        object-fit: cover;
+    }
 
-        #panduanPanelAdmin i {
-            margin-right: 10px !important;
-        }
+    #panduanPanelAdmin i {
+        margin-right: 10px !important;
+    }
 
-        div#galeriImage .dz-preview.dz-image-preview {
-            margin: 5px !important;
-        }
+    div#galeriImage .dz-preview.dz-image-preview {
+        margin: 5px !important;
+    }
     </style>
 
     <script src="<?= base_url(); ?>backend/js/jquery1-3.4.1.min.js"></script>
@@ -145,6 +151,7 @@
     <script src="<?= base_url(); ?>backend/vendors/progressbar/jquery.barfiller.js"></script>
     <script src="<?= base_url(); ?>backend/vendors/tagsinput/tagsinput.js"></script>
     <script src="<?= base_url(); ?>backend/vendors/text_editor/summernote-bs4.js"></script>
+    <script src="<?= base_url(); ?>frontend/assets/vendors/glightbox/js/glightbox.min.js"></script>
 </head>
 
 <body class="crm_body_bg">
@@ -229,7 +236,8 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <div class="footer_iner text-center">
-                            <p>2024 © Karangan Bunga Manokwari - Designed with <i class="bi bi-heart-fill"></i> by<a href="https://arasoft.id/" target="_blank"> Arasoft Digital Creative</a></p>
+                            <p>2024 © Karangan Bunga Manokwari - Designed with <i class="bi bi-heart-fill"></i> by<a
+                                    href="https://arasoft.id/" target="_blank"> Arasoft Digital Creative</a></p>
                         </div>
                     </div>
                 </div>
@@ -239,5 +247,12 @@
 
 </body>
 
+<script>
+$(document).ready(function() {
+    const lightbox = GLightbox({
+        selector: '.glightbox'
+    });
+});
+</script>
 
 </html>

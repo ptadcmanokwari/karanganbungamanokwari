@@ -46,9 +46,12 @@
                                     <td><?= $index + 1 ?></td>
                                     <td>
                                         <div class="zoom-container">
-                                            <img class="w-100 zoom-in img-thumbnail"
-                                                src="<?= base_url('uploads/gallery/' . $galeri['img']) ?>"
-                                                alt="galeri Image">
+                                            <a href="<?= base_url('uploads/gallery/' . $galeri['img']) ?>"
+                                                data-gallery="portfolio-gallery-app" class="glightbox preview-link">
+                                                <img class="w-100 zoom-in img-thumbnail"
+                                                    src="<?= base_url('uploads/gallery/' . $galeri['img']) ?>"
+                                                    alt="galeri Image">
+                                            </a>
                                         </div>
                                     </td>
                                     <td>
@@ -218,8 +221,9 @@ var myDropzone = new Dropzone("#myDropzone", {
             Swal.fire({
                 icon: 'success',
                 title: 'Upload Berhasil',
-                showConfirmButton: true,
-                confirmButtonText: 'OK'
+                timer: 2000, // Auto-close after 3 seconds
+                timerProgressBar: true,
+                showConfirmButton: false // Hide the default "OK" button
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#addGalleryCroping').modal('hide');
@@ -262,6 +266,9 @@ var galeriImageDropzone = new Dropzone("#galeriImage", {
                 icon: 'success',
                 title: 'Berhasil',
                 text: 'Galeri baru telah diunggah',
+                timer: 2000, // Auto-close after 3 seconds
+                timerProgressBar: true,
+                showConfirmButton: false // Hide the default "OK" button
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#addGaleriMasal').modal('hide');
@@ -275,6 +282,9 @@ var galeriImageDropzone = new Dropzone("#galeriImage", {
                 icon: 'error',
                 title: 'Gagal',
                 text: 'Galeri baru tidak berhasil diunggah',
+                timer: 2000, // Auto-close after 3 seconds
+                timerProgressBar: true,
+                showConfirmButton: false // Hide the default "OK" button
             });
         });
     }
@@ -362,6 +372,9 @@ $('#tabelGaleri').DataTable({
                                 icon: 'success',
                                 title: 'Berhasil!',
                                 text: 'Galeri telah dihapus.',
+                                timer: 2000, // Auto-close after 3 seconds
+                                timerProgressBar: true,
+                                showConfirmButton: false // Hide the default "OK" button
                             }).then(() => {
                                 location.reload();
                             });
@@ -371,6 +384,9 @@ $('#tabelGaleri').DataTable({
                                 icon: 'error',
                                 title: 'Gagal',
                                 text: 'Galeri belum dihapus.',
+                                timer: 2000, // Auto-close after 3 seconds
+                                timerProgressBar: true,
+                                showConfirmButton: false // Hide the default "OK" button
                             });
                         }
                     });
@@ -398,6 +414,9 @@ $('#tabelGaleri').DataTable({
                         icon: 'success',
                         title: 'Berhasil',
                         text: 'Status telah diperbarui.',
+                        timer: 2000, // Auto-close after 3 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false // Hide the default "OK" button
                     });
                 },
                 error: function() {
@@ -405,6 +424,9 @@ $('#tabelGaleri').DataTable({
                         icon: 'error',
                         title: 'Gagal',
                         text: 'Status belum diperbarui.',
+                        timer: 2000, // Auto-close after 3 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false // Hide the default "OK" button
                     });
                 }
             });
@@ -427,15 +449,21 @@ $('#tabelGaleri').DataTable({
                         icon: 'success',
                         title: 'Berhasil',
                         text: 'Galeri telah ditampilkan di halaman Beranda',
+                        timer: 2000, // Auto-close after 3 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false // Hide the default "OK" button
                     });
                 },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Galeri gagal ditampilkan di halaman Beranda',
-                    });
-                }
+                // error: function() {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         title: 'Error',
+                //         text: 'Galeri gagal ditampilkan di halaman Beranda',
+                //         timer: 2000, // Auto-close after 3 seconds
+                //         timerProgressBar: true,
+                //         showConfirmButton: false // Hide the default "OK" button
+                //     });
+                // }
             });
         });
     },

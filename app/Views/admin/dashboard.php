@@ -25,7 +25,7 @@
                             data-bs-parent="#panduanPanelAdmin">
                             <div class="accordion-body">
                                 <iframe src="<?= base_url(); ?>/uploads/panduan/akses-panel-admin.pdf" width="100%"
-                                    height="500px"></iframe>
+                                    height="700px"></iframe>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             data-bs-parent="#panduanPanelAdmin">
                             <div class="accordion-body">
                                 <iframe src="<?= base_url(); ?>/uploads/panduan/pengaturan-produk.pdf" width="100%"
-                                    height="500px"></iframe>
+                                    height="700px"></iframe>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                             data-bs-parent="#panduanPanelAdmin">
                             <div class="accordion-body">
                                 <iframe src="<?= base_url(); ?>/uploads/panduan/pengaturan-galeri.pdf" width="100%"
-                                    height="500px"></iframe>
+                                    height="700px"></iframe>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                             data-bs-parent="#panduanPanelAdmin">
                             <div class="accordion-body">
                                 <iframe src="<?= base_url(); ?>/uploads/panduan/pengaturan-slider.pdf" width="100%"
-                                    height="500px"></iframe>
+                                    height="700px"></iframe>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                             data-bs-parent="#panduanPanelAdmin">
                             <div class="accordion-body">
                                 <iframe src="<?= base_url(); ?>/uploads/panduan/pengaturan-halaman.pdf" width="100%"
-                                    height="500px"></iframe>
+                                    height="700px"></iframe>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                             data-bs-parent="#panduanPanelAdmin">
                             <div class="accordion-body">
                                 <iframe src="<?= base_url(); ?>/uploads/panduan/pengaturan-sistem.pdf" width="100%"
-                                    height="500px"></iframe>
+                                    height="700px"></iframe>
                             </div>
                         </div>
                     </div>
