@@ -259,6 +259,14 @@
             object-fit: cover;
             width: 100%;
         }
+
+        @media only screen and (min-width: 92px) {
+            #beranda img {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
     </style>
 </head>
 

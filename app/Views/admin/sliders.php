@@ -12,7 +12,7 @@
                         <h4>Tabel Slider</h4>
                         <div class="box_right d-flex lms_block">
                             <div class="add_button ms-2">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#addSliderBaru" class="btn_1">Tambah
+                                <a href="#" data-bs-toggle="modal" modal data-bs-target="#addSliderBaru" class="btn_1">Tambah
                                     Slider Baru</a>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
 </div>
 
 <!-- The Modal -->
-<div class="modal fade" id="addSliderBaru" tabindex="-1" aria-labelledby="addSliderBaruLabel" aria-hidden="true">
+<div class="modal fade" id="addSliderBaru" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addSliderBaruLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
