@@ -1,6 +1,8 @@
 <?= $this->extend('admin/template') ?>
 
 <?= $this->section('content') ?>
+<!-- Cropper CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 <div class="main_content_iner ">
     <div class="container-fluid plr_30 body_white_bg pt_30">
         <div class="row justify-content-center">
@@ -72,34 +74,40 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="sliderUploadForm" action="<?= base_url('admin/save_sliders'); ?>" method="post"
-                    enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="sliderImage" class="form-label">Gambar Slider</label>
-                        <div class="dropzone" id="sliderImage"></div>
-                    </div>
-                    <div class="mb-3">
-                        <input class="form-control" type="hidden" name="status" id="status" value="0">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="title">Judul Slider</label>
-                        <input class="form-control" type="text" name="title" id="title">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="subtitle">Subjudul Slider</label>
-                        <input class="form-control" type="text" name="subtitle" id="subtitle">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Unggah Slider</button>
-                    </div>
-                </form>
+
+                <div class="mb-3">
+                    <span>Gambar Slider</span>
+                    <!-- <div class="dropzone" id="sliderImage"></div> -->
+                    <form action="<?= base_url('admin/save_sliders') ?>" class="dropzone" id="sliderImage"></form>
+                </div>
+
+                <div style="max-height: 400px" id="cropContainer" style="display: none;">
+                    <img id="cropImage">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="hidden" name="status" id="status" value="1">
+                </div>
+                <!-- <div class="mb-3">
+                    <label class="form-label" for="title">Judul Slider</label>
+                    <input class="form-control" type="text" name="title" id="title">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="subtitle">Subjudul Slider</label>
+                    <input class="form-control" type="text" name="subtitle" id="subtitle">
+                </div> -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button class="btn btn-primary" id="cropBtn">Crop & Unggah Slider</button>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+<!-- Cropper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -113,84 +121,130 @@ $(document).ready(function() {
         maxFiles: 1,
         dictDefaultMessage: "Seret gambar ke sini untuk unggah",
         autoProcessQueue: false,
+
         init: function() {
             var dz = this;
-
-            // On form submit
-            $("#sliderUploadForm").on("submit", function(e) {
-                e.preventDefault();
-                dz.processQueue();
+            this.on("addedfile", function(file) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('cropContainer').style.display = 'flex';
+                    var cropImage = document.getElementById('cropImage');
+                    cropImage.src = event.target.result;
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+                    cropper = new Cropper(cropImage, {
+                        aspectRatio: 16 / 9,
+                        viewMode: 1,
+                        responsive: true,
+                        scalable: false,
+                        zoomable: false,
+                    });
+                };
+                reader.readAsDataURL(file);
             });
+
 
             this.on("sending", function(file, xhr, formData) {
-                formData.append("status", $("input[name='status']:checked").val());
-                formData.append("title", $("input[name='title']").val());
-                formData.append("subtitle", $("input[name='subtitle']").val());
+                formData.append("status", $("input[name='status']").val());
+                // formData.append("title", $("input[name='title']").val());
+                // formData.append("subtitle", $("input[name='subtitle']").val());
             });
 
-            this.on("success", function(file, response) {
+            this.on("queuecomplete", function() {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Berhasil',
-                    text: 'Slider baru telah diunggah.',
+                    title: 'Upload Berhasil',
+                    timer: 1000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
                 }).then((result) => {
-                    if (result.isConfirmed) {
-                        $('#addSliderBaru').modal('hide');
-                        location.reload();
-                    }
+                    $('#addSliderBaru').modal('hide');
+                    resetModal();
+
                 });
+                location.reload();
             });
 
-            this.on("error", function(file, response) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Gagal',
-                    text: 'Slider baru belum berhasil diunggah.',
-                });
-            });
         }
     });
+
+
+    var cropper;
+
+    function resetModal() {
+        document.getElementById('cropContainer').style.display = 'none';
+        document.getElementById('cropImage').src = '';
+        document.getElementById('title').value = '';
+        document.getElementById('subtitle').value = '';
+        sliderImageDropzone.removeAllFiles();
+    }
+
+    document.getElementById('cropBtn').addEventListener('click', function() {
+        var croppedCanvas = cropper.getCroppedCanvas({
+            width: 1000,
+            height: 1000,
+            imageSmoothingEnabled: true,
+            imageSmoothingQuality: 'high'
+        });
+
+        croppedCanvas.toBlob(function(blob) {
+            var croppedFile = new File([blob], "cropped_image.jpg", {
+                type: "image/webp"
+            });
+            sliderImageDropzone.removeAllFiles();
+            sliderImageDropzone.addFile(croppedFile);
+            sliderImageDropzone.processQueue();
+        }, 'image/webp');
+    });
+
+    $('#addGalleryCroping').on('hidden.bs.modal', function() {
+        resetModal();
+    });
+
 
     $('#tabelSlider .status-toggle').bootstrapSwitch();
-    $('#tabelSlider .status-toggle').on('switchChange.bootstrapSwitch', function(event, state) {
-        var sliderId = $(this).data('id');
-        var newStatus = state ? 1 : 0;
+    $('#tabelSlider .status-toggle').on(
+        'switchChange.bootstrapSwitch',
+        function(event, state) {
+            var sliderId = $(this).data('id');
+            var newStatus = state ? 1 : 0;
 
-        var activeSliders = $('#tabelSlider .status-toggle:checked').length;
+            var activeSliders = $('#tabelSlider .status-toggle:checked').length;
 
-        if (newStatus === 1 && activeSliders >= 6) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops!',
-                text: 'Hanya dapat mengaktifkan 5 slider',
-            });
-            $(this).bootstrapSwitch('state', false, true);
-            return false;
-        }
-
-        $.ajax({
-            url: "<?= base_url('admin/status_sliders'); ?>",
-            type: "POST",
-            data: {
-                id: sliderId,
-                status: newStatus
-            },
-            success: function(response) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: 'Status telah berubah.',
-                });
-            },
-            error: function() {
+            if (newStatus === 1 && activeSliders >= 6) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Gagal',
-                    text: 'Status belum berubah.',
+                    title: 'Oops!',
+                    text: 'Hanya dapat mengaktifkan 5 slider',
                 });
+                $(this).bootstrapSwitch('state', false, true);
+                return false;
             }
+
+            $.ajax({
+                url: "<?= base_url('admin/status_sliders'); ?>",
+                type: "POST",
+                data: {
+                    id: sliderId,
+                    status: newStatus
+                },
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Status telah berubah.',
+                    });
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Status belum berubah.',
+                    });
+                }
+            });
         });
-    });
 
     // Handle delete action for slider
     $('#tabelSlider .delete-slider').on('click', function() {

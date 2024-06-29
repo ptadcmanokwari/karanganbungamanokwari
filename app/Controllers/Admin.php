@@ -38,9 +38,9 @@ class Admin extends BaseController
 
             $data = [
                 'img' => $imgName,
-                'title' => $this->request->getPost('title'),
-                'subtitle' => $this->request->getPost('subtitle'),
-                'is_active' => $this->request->getPost('status') === 'active' ? 1 : 0
+                // 'title' => $this->request->getPost('title'),
+                // 'subtitle' => $this->request->getPost('subtitle'),
+                'is_active' => $this->request->getPost('status'),
             ];
 
             $model->insert($data);

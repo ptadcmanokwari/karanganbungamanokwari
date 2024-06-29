@@ -377,9 +377,9 @@
                                         Pangkat, dll.</span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
-                                <a href="<?= base_url(); ?>section_welcome/UcapanSelamat.jpg"
+                                <a href="<?= base_url(); ?>section_welcome/UcapanSelamat.webp"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                                    <img src="<?= base_url(); ?>section_welcome/UcapanSelamat.jpg"
+                                    <img src="<?= base_url(); ?>section_welcome/UcapanSelamat.webp"
                                         class="testimonial-img zoom-in"
                                         style="height: 200px !important; object-fit: cover !important;" alt="Karangan Bunga Manokwari Ucapan Selamat dan
                                         Sukses, Selamat Atas Promosi Jabatan, Selamat Atas Kenaikan Pangkat"></a>
@@ -399,9 +399,9 @@
                                         dll </span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
-                                <a href="<?= base_url(); ?>section_welcome/UcapanDuka.jpg"
+                                <a href="<?= base_url(); ?>section_welcome/UcapanDuka.webp"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                                    <img src="<?= base_url(); ?>section_welcome/UcapanDuka.jpg"
+                                    <img src="<?= base_url(); ?>section_welcome/UcapanDuka.webp"
                                         class="testimonial-img zoom-in"
                                         style="height: 200px !important; object-fit: cover !important;"
                                         alt="Karangan Bunga Manokwari Ucapan Duka Cita, Bela Sungkawa, Turut Berduka Cita, Turut Berbela Sungkawa">
@@ -419,9 +419,9 @@
                                         dll.</span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
-                                <a href="<?= base_url(); ?>section_welcome/UcapanHUT.jpg"
+                                <a href="<?= base_url(); ?>section_welcome/UcapanHUT.webp"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                                    <img src="<?= base_url(); ?>section_welcome/UcapanHUT.jpg"
+                                    <img src="<?= base_url(); ?>section_welcome/UcapanHUT.webp"
                                         class="testimonial-img zoom-in"
                                         style="height: 200px !important; object-fit: cover !important;"
                                         alt="Karangan Bunga Manokwari Ucapan Selamat Hari Ulang Tahun, Dirgahayu, Selamat Hari Jadi, Anniversary">
@@ -439,9 +439,9 @@
                                         dll.</span>
                                     <i class="bi bi-quote quote-icon-right"></i>
                                 </p>
-                                <a href="<?= base_url(); ?>section_welcome/UcapanLaunching.jpg"
+                                <a href="<?= base_url(); ?>section_welcome/UcapanLaunching.webp"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                                    <img src="<?= base_url(); ?>section_welcome/UcapanLaunching.jpg"
+                                    <img src="<?= base_url(); ?>section_welcome/UcapanLaunching.webp"
                                         class="testimonial-img zoom-in"
                                         style="height: 200px !important; object-fit: cover !important;"
                                         alt="Karangan Bunga Manokwari Ucapan Selamat atas Peresmian suatu Kantor, Launching Bisnis, Pendirian Usaha,">
