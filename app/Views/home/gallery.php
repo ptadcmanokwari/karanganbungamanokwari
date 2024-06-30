@@ -274,7 +274,7 @@
 <body class="index-page">
     <header id="header" class="header d-flex flex-column">
         <i class="header-toggle d-xl-none bi bi-list"></i>
-        <img src="<?= base_url() . $logo; ?>" alt="">
+        <img src="<?= base_url() . $logo; ?>" alt="Karangan Bunga Manokwari Spesialis Papan Bunga">
         <div class="social-links text-center">
             <a href="https://wa.me/<?= $whatsapp; ?>" class="whatsapp" target="_blank"><i
                     class="bi bi-whatsapp"></i></a>

@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
-<!-- Mirrored from demo.dashboardpack.com/finance-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jan 2024 16:27:44 GMT -->
+<html lang="en">
 
 <head>
 
     <meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Finance</title>
-    <link rel="icon" href="<?= base_url(); ?>backend/img/logo.png" type="image/png">
+
+    <meta name="description"
+        content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Kami menyediakan papan bunga dengan desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, ucapan duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
+    <meta name="keywords"
+        content="karangan papan bunga, jasa pembuatan bunga papan, desain papan bunga, papan bunga pernikahan, papan bunga ucapan selamat, papan bunga duka cita, bunga papan murah">
+    <meta name="author" content="Karangan Bunga Manokwari">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Karangan Bunga Manokwari">
+    <meta property="og:description"
+        content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, acara duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
+    <meta property="og:image" content="<?= base_url(); ?>uploads/karanganbungamanokwari.jpg">
+    <meta property="og:url" content="https://karanganbungamanokwari.com">
+    <meta property="og:type" content="website">
+    <title><?= $title; ?></title>
+    <!-- Favicons -->
+    <link href="<?= base_url(); ?>frontend/assets/img/settings/favicon_io/favicon.ico" rel="icon">
+    <link href="<?= base_url(); ?>frontend/assets/img/settings/favicon_io/apple-touch-icon.png" rel="apple-touch-icon">
 
     <link rel="stylesheet" href="<?= base_url(); ?>backend/css/bootstrap1.min.css" />
 
@@ -41,106 +55,135 @@
 
     <link rel="stylesheet" href="<?= base_url(); ?>backend/css/style1.css" />
     <link rel="stylesheet" href="<?= base_url(); ?>backend/css/colors/default.css" id="colorSkinCSS">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" rel="stylesheet">
 
+    <!-- Swall -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css"
+        rel="stylesheet">
+    <link href="<?= base_url(); ?>frontend/assets/vendors/glightbox/css/glightbox.min.css" rel="stylesheet">
     <style>
-        @media only screen and (max-width: 992px) {
-            .header_iner.d-flex.justify-content-between.align-items-center {
-                background-color: #ff78af !important;
-                padding: 10px;
-            }
-
-            .sidebar_icon i {
-                font-size: 25px;
-                color: #fff;
-            }
-
-            .header_notification_warp.d-flex.align-items-center i {
-                color: #fff;
-            }
-
-            .white_box_tittle.list_header {
-                display: flex;
-                align-items: center !important;
-            }
-
-            .white_box_tittle.list_header h4,
-            .box_right.d-flex.lms_block .add_button.ms-2 {
-                margin: 0;
-            }
+    @media only screen and (max-width: 992px) {
+        .header_iner.d-flex.justify-content-between.align-items-center {
+            background-color: #ff78af !important;
+            padding: 10px;
         }
 
-        .sidebar #sidebar_menu li.mm-active>a {
-            color: #1f253a;
-            font-weight: bold;
+        .sidebar_icon i {
+            font-size: 25px;
+            color: #fff;
         }
 
-        .dropzone {
-            border: 2px dashed #007bff;
-            border-radius: 5px;
-            background: white;
+        .header_notification_warp.d-flex.align-items-center i {
+            color: #fff;
         }
 
-        div#sliderImage {
+        .white_box_tittle.list_header {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            align-items: center !important;
         }
 
-        i.bi.bi-grid-fill.ml-2 {
-            margin: 0 !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .white_box_tittle.list_header h4,
+        .box_right.d-flex.lms_block .add_button.ms-2 {
+            margin: 0;
         }
+    }
 
-        /* Slider, galeri, produk */
-        .zoom-container {
-            overflow: hidden;
-            width: 100%;
-            /* height: 230px; */
-            position: relative;
-        }
+    .sidebar #sidebar_menu li.mm-active>a {
+        color: #1f253a;
+        font-weight: bold;
+    }
 
-        .zoom-in {
-            transition: transform 0.3s ease;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    .dropzone {
+        border: 2px dashed #007bff;
+        border-radius: 5px;
+        background: white;
+    }
 
-        .zoom-in:hover {
-            transform: scale(1.5);
-        }
+    div#sliderImage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        /* gambar Produk */
-        #tabelTestimoni img,
-        #tabelSlider img,
-        #tabelGaleri img,
-        #tabelProduk img {
-            height: 150px !important;
-            object-fit: cover;
-        }
+    i.bi.bi-grid-fill.ml-2 {
+        margin: 0 !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        #panduanPanelAdmin i {
-            margin-right: 10px !important;
-        }
+    /* Slider, galeri, produk */
+    .zoom-container {
+        overflow: hidden;
+        width: 100%;
+        /* height: 230px; */
+        position: relative;
+    }
 
-        div#galeriImage .dz-preview.dz-image-preview {
-            margin: 5px !important;
-        }
+    .zoom-in {
+        transition: transform 0.3s ease;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .zoom-in:hover {
+        transform: scale(1.5);
+    }
+
+    /* gambar Produk */
+    #tabelTestimoni img,
+    #tabelSlider img,
+    #tabelGaleri img,
+    #tabelProduk img {
+        height: 150px !important;
+        object-fit: cover;
+    }
+
+    #panduanPanelAdmin i {
+        margin-right: 10px !important;
+    }
+
+    div#galeriImage .dz-preview.dz-image-preview {
+        margin: 5px !important;
+    }
+
+    .header_iner .header_right .header_notification_warp li a {
+        font-size: 14px;
+        color: white;
+        position: relative;
+        margin-right: 29px;
+        display: inline-block;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #ff78af !important;
+        background-color: #fff7fa !important;
+        box-shadow: none !important;
+    }
+
+    .accordion-button:focus {
+        border-color: #fe86f3 !important;
+    }
     </style>
+
+
 </head>
 
 <body class="crm_body_bg">
+
     <nav class="sidebar">
         <div class="logo d-flex justify-content-between">
-            <a href="index-2.html"><img src="<?= base_url(); ?>backend/img/logo.png" alt></a>
+            <a href="<?= base_url(); ?>admin"><img src="<?= base_url(); ?>backend/img/logo.png" alt></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>
         </div>
-        <ul id="sidebar_menu">
+        <ul id="sidebar_menu" class="mt-10">
             <li class="<?= ($current_uri == 'dashboard' || $current_uri == 'admin') ? 'mm-active' : '' ?>">
                 <a href="<?= base_url('admin/dashboard'); ?>" aria-expanded="false">
                     <i class="bi bi-laptop" style="font-size: 1.5rem;"></i>
@@ -197,8 +240,9 @@
         </ul>
     </nav>
 
+
     <section class="main_content dashboard_part">
-        <div class="container-fluid g-0">
+        <div class="container-fluid g-0 d-lg-none d-md-none">
             <div class="row">
                 <div class="col-lg-12 p-0">
                     <div class="header_iner d-flex justify-content-between align-items-center">
@@ -212,10 +256,11 @@
                         <div class="header_right d-flex justify-content-between align-items-center">
                             <div class="header_notification_warp d-flex align-items-center">
                                 <li>
-                                    <a href="#"><i class="bi bi-globe"></i></a>
+                                    <a href="<?= base_url(); ?>" target="_blank"><i class="bi bi-globe"></i> Lihat
+                                        Website</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="bi bi-box-arrow-right"></i></a>
+                                    <a href="<?= base_url(); ?>logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
                                 </li>
                             </div>
                         </div>
@@ -224,6 +269,32 @@
             </div>
         </div>
 
+        <script src="<?= base_url(); ?>backend/js/jquery1-3.4.1.min.js"></script>
+        <script src="<?= base_url(); ?>backend/js/popper1.min.js"></script>
+        <script src="<?= base_url(); ?>backend/js/bootstrap1.min.js"></script>
+        <script src="<?= base_url(); ?>backend/js/metisMenu.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/count_up/jquery.waypoints.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/chartlist/Chart.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/count_up/jquery.counterup.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/swiper_slider/js/swiper.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/niceselect/js/jquery.nice-select.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/owl_carousel/js/owl.carousel.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/gijgo/gijgo.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/datatable/js/jquery.dataTables.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/datatable/js/dataTables.responsive.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/datatable/js/dataTables.buttons.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/datatable/js/buttons.flash.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/datatable/js/jszip.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/datatable/js/pdfmake.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/datatable/js/vfs_fonts.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/datatable/js/buttons.html5.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/datatable/js/buttons.print.min.js"></script>
+        <script src="<?= base_url(); ?>backend/js/chart.min.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/progressbar/jquery.barfiller.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/tagsinput/tagsinput.js"></script>
+        <script src="<?= base_url(); ?>backend/vendors/text_editor/summernote-bs4.js"></script>
+        <script src="<?= base_url(); ?>frontend/assets/vendors/glightbox/js/glightbox.min.js"></script>
+        <script src="<?= base_url(); ?>backend/js/custom.js"></script>
         <?= $this->renderSection('content') ?>
 
         <div class="footer_part">
@@ -231,7 +302,8 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <div class="footer_iner text-center">
-                            <p>2024 © Karangan Bunga Manokwari - Designed with <i class="bi bi-heart-fill"></i> by<a href="https://arasoft.id/" target="_blank"> Arasoft Digital Creative</a></p>
+                            <p>2024 © Karangan Bunga Manokwari - Designed by<a href="https://arasoft.id/"
+                                    target="_blank"> Arasoft Digital Creative</a></p>
                         </div>
                     </div>
                 </div>
@@ -239,59 +311,13 @@
         </div>
     </section>
 
-
-    <script src="<?= base_url(); ?>backend/js/jquery1-3.4.1.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/js/popper1.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/js/bootstrap1.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/js/metisMenu.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/count_up/jquery.waypoints.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/chartlist/Chart.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/count_up/jquery.counterup.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/swiper_slider/js/swiper.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/niceselect/js/jquery.nice-select.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/owl_carousel/js/owl.carousel.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/gijgo/gijgo.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/datatable/js/dataTables.responsive.min.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/datatable/js/dataTables.buttons.min.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/datatable/js/buttons.flash.min.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/datatable/js/jszip.min.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/datatable/js/pdfmake.min.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/datatable/js/vfs_fonts.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/datatable/js/buttons.html5.min.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/datatable/js/buttons.print.min.js"></script>
-    <script src="<?= base_url(); ?>backend/js/chart.min.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/progressbar/jquery.barfiller.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/tagsinput/tagsinput.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/text_editor/summernote-bs4.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/apex_chart/apexcharts.js"></script>
-
-    <script src="<?= base_url(); ?>backend/js/custom.js"></script>
-
-    <script src="<?= base_url(); ?>backend/js/active_chart.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/apex_chart/radial_active.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/apex_chart/stackbar.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/apex_chart/area_chart.js"></script>
-
-    <script src="<?= base_url(); ?>backend/vendors/apex_chart/bar_active_1.js"></script>
-    <script src="<?= base_url(); ?>backend/vendors/chartjs/chartjs_active.js"></script>
-
 </body>
-
-<!-- Mirrored from demo.dashboardpack.com/finance-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jan 2024 16:28:10 GMT -->
+<script>
+$(document).ready(function() {
+    const lightbox = GLightbox({
+        selector: '.glightbox'
+    });
+});
+</script>
 
 </html>

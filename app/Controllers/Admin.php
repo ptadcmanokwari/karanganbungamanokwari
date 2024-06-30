@@ -11,9 +11,24 @@ use App\Models\ImageModel;
 
 class Admin extends BaseController
 {
+
+    private $logo;
+    private $data;
+    
+    public function __construct()
+    {
+        // parent::__construct();
+        $settings = new SettingsModel();
+        $this->logo = $settings->getSettings('logo')->getRow()->nilai;
+       
+    }
+    
     public function index(): string
     {
         $data['title'] = 'Dashboard';
+        // $data['logo'] = 'frontend/assets/img/settings/logokarbumanokwari.png';
+        // $data['logo'] = $this->logo;
+
         return $this->loadView('admin/dashboard', $data);
     }
 
@@ -83,9 +98,9 @@ class Admin extends BaseController
         $categoryModel = new ProductsModel();
         $data['categories'] = $categoryModel->findAll();
         $data['title'] = 'Produk';
-        $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
+        // $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
 
-        return view('admin/products', $data);
+        return $this->loadView('admin/products', $data);
     }
 
     public function save_products()
@@ -201,6 +216,7 @@ class Admin extends BaseController
         } else {
             return $this->response->setJSON(['success' => false, 'errors' => ['No data to update']]);
         }
+
     }
 
 
@@ -223,9 +239,9 @@ class Admin extends BaseController
         $model = new GalleryModel();
         $data['galeris'] = $model->getGallery();
         $data['title'] = 'Galeri';
-        $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
+        // $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
 
-        return view('admin/gallery', $data);
+        return $this->loadView('admin/gallery', $data);
     }
 
     public function save_gallery()
@@ -293,7 +309,7 @@ class Admin extends BaseController
     public function page_setting()
     {
         $data['title'] = 'Pengaturan Halaman';
-        $data['current_uri'] = service('uri')->getSegment(2);
+        // $data['current_uri'] = service('uri')->getSegment(2);
 
         // Mendapatkan data setting dari database (hanya nomor 11 - 15)
         $model = new SettingsModel();
@@ -301,7 +317,7 @@ class Admin extends BaseController
 
         $data['setting'] = $model->getSpecificSettings($parameters);
 
-        return view('admin/page_setting', $data);
+        return $this->loadView('admin/page_setting', $data);
     }
 
     public function update_page_setting()
@@ -336,24 +352,17 @@ class Admin extends BaseController
     }
 
 
-    private function loadView(string $viewName, array $data = []): string
-    {
-        $uri = service('uri');
-        $data['current_uri'] = $uri->getSegment(2); // Ambil segmen kedua dari URI
-        return view($viewName, $data);
-    }
-
     public function system_setting()
     {
         $data['title'] = 'Pengaturan Sistem';
-        $data['current_uri'] = service('uri')->getSegment(2);
+        // $data['current_uri'] = service('uri')->getSegment(2);
 
         // Mendapatkan data setting dari database (hanya nomor 1 - 10)
         $model = new SettingsModel();
         $parameters = ['site-title', 'site-desc', 'instagram', 'facebook', 'whatsapp', 'logo', 'website', 'alamat', 'gambartoko1', 'alamat2', 'gambartoko2'];
         $data['setting'] = $model->getSpecificSettings($parameters);
 
-        return view('admin/system_setting', $data);
+        return $this->loadView('admin/system_setting', $data);
     }
 
 
@@ -422,9 +431,9 @@ class Admin extends BaseController
         $model = new TestimonialsModel();
         $data['testimonials'] = $model->getTestimonials();
         $data['title'] = 'Testimonial';
-        $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
+        // $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
 
-        return view('admin/testimonials', $data);
+        return $this->loadView('admin/testimonials', $data);
     }
 
     public function save_testimonials()
@@ -473,5 +482,16 @@ class Admin extends BaseController
         }
 
         return $this->response->setJSON(['error' => 'Testimonial not found']);
+    }
+
+
+    private function loadView(string $viewName, array $data = []): string
+    {
+        $uri = service('uri');
+        $data['current_uri'] = $uri->getSegment(2); // Ambil segmen kedua dari URI
+        $data['logo'] = $this->logo;
+        $data['txtpaneladmin'] = "Panel Administrator";
+       
+        return view($viewName, $data);
     }
 }
