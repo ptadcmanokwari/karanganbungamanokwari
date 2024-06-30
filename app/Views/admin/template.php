@@ -7,15 +7,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <meta name="description"
-        content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Kami menyediakan papan bunga dengan desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, ucapan duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
-    <meta name="keywords"
-        content="karangan papan bunga, jasa pembuatan bunga papan, desain papan bunga, papan bunga pernikahan, papan bunga ucapan selamat, papan bunga duka cita, bunga papan murah">
+    <meta name="description" content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Kami menyediakan papan bunga dengan desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, ucapan duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
+    <meta name="keywords" content="karangan papan bunga, jasa pembuatan bunga papan, desain papan bunga, papan bunga pernikahan, papan bunga ucapan selamat, papan bunga duka cita, bunga papan murah">
     <meta name="author" content="Karangan Bunga Manokwari">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Karangan Bunga Manokwari">
-    <meta property="og:description"
-        content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, acara duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
+    <meta property="og:description" content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, acara duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
     <meta property="og:image" content="<?= base_url(); ?>uploads/karanganbungamanokwari.jpg">
     <meta property="og:url" content="https://karanganbungamanokwari.com">
     <meta property="og:type" content="website">
@@ -55,16 +52,14 @@
 
     <link rel="stylesheet" href="<?= base_url(); ?>backend/css/style1.css" />
     <link rel="stylesheet" href="<?= base_url(); ?>backend/css/colors/default.css" id="colorSkinCSS">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" rel="stylesheet">
 
     <!-- Swall -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css"
-        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
     <link href="<?= base_url(); ?>frontend/assets/vendors/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="<?= base_url(); ?>assets/palingcustombackend.css" rel="stylesheet">
 
@@ -199,8 +194,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <div class="footer_iner text-center">
-                            <p>2024 © Karangan Bunga Manokwari - Designed by<a href="https://arasoft.id/"
-                                    target="_blank"> Arasoft Digital Creative</a></p>
+                            <p>2024 © Karangan Bunga Manokwari - Designed by<a href="https://arasoft.id/" target="_blank"> Arasoft Digital Creative</a></p>
                         </div>
                     </div>
                 </div>
@@ -210,11 +204,11 @@
 
 </body>
 <script>
-$(document).ready(function() {
-    const lightbox = GLightbox({
-        selector: '.glightbox'
+    $(document).ready(function() {
+        const lightbox = GLightbox({
+            selector: '.glightbox'
+        });
     });
-});
 </script>
 
 </html>

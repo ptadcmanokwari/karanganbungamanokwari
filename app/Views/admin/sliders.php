@@ -131,6 +131,10 @@
 
         // Inisialisasi ulang Bootstrap Switch dan pengikatan event handler saat tabel di-render ulang
         table.on('draw.dt', function() {
+            var lightbox = GLightbox({
+                selector: '.glightbox'
+            });
+
             $('#tabelSlider .is_active').bootstrapSwitch();
 
             $('#tabelSlider .is_active').on('switchChange.bootstrapSwitch', function(event, state) {
