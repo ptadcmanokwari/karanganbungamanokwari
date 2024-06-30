@@ -13,7 +13,7 @@
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Karangan Bunga Manokwari">
     <meta property="og:description" content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, acara duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
-    <meta property="og:image" content="<?= base_url(); ?>uploads/karanganbungamanokwari.jpg">
+    <meta property="og:image" content="<?= base_url(); ?>uploads/karanganbungamanokwari.webp">
     <meta property="og:url" content="https://karanganbungamanokwari.com">
     <meta property="og:type" content="website">
     <!-- Favicons -->
