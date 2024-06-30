@@ -28,9 +28,13 @@ $routes->post('/admin/save_sliders', 'Admin::save_sliders');
 $routes->post('/admin/delete_sliders', 'Admin::delete_sliders');
 
 // Routes Kategori Produk
-$routes->get('/admin/products', 'Admin::products');
-$routes->get('/admin/delete_products/(:num)', 'Admin::delete_products/$1');
-$routes->post('/admin/delete_products/(:num)', 'Admin::delete_products/$1');
+$routes->get('/admin/products2', 'Admin::products2');
+$routes->get('/admin/products2ajax', 'Admin::products2ajax');
+$routes->post('admin/deleteProduct2','Admin::deleteProduct2');
+
+$routes->get('/admin/products', 'Admin::products2');
+// $routes->get('/admin/delete_products/(:num)', 'Admin::delete_products/$1');
+// $routes->post('/admin/delete_products/(:num)', 'Admin::delete_products/$1');
 $routes->get('/admin/editproducts/(:num)', 'Admin::editproducts/$1');
 $routes->post('/admin/save_products', 'Admin::save_products', ['as' => 'admin.save_products']);
 $routes->get('/admin/save_products', 'Admin::save_products', ['as' => 'admin.save_products']);

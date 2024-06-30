@@ -24,4 +24,6 @@ class ProductsModel extends Model
             return $this->getWhere(['id' => $id]);
         }
     }
+
+    
 }

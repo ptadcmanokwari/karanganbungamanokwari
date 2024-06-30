@@ -92,13 +92,45 @@ class Admin extends BaseController
         return $this->response->setJSON(['error' => 'Slider not found']);
     }
 
-    // Products
+     //BARU UNTUK PENANGANAN PRODUK BERBASIS AJAX (TANPA RELOAD PAGE)
+     public function products2() 
+     {
+         $data['title'] = 'Produk';
+     
+         return $this->loadView('admin/products2', $data);
+     }
+ 
+     public function products2ajax() 
+     {
+         $productsModel = new ProductsModel();
+         $dataProducts = $productsModel->findAll();
+         echo json_encode(['data' => $dataProducts]);
+     }
+
+     public function deleteProduct2()
+    {
+        $request = $this->request->getPost();
+        $id = $request['id'];
+
+        $productsModel = new ProductsModel(); // Ganti dengan model Anda
+        $delete = $productsModel->delete($id);
+
+        if ($delete) {
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setJSON(['status' => 'error']);
+        }
+    }
+ 
+     // ENDING AJAX PRODUK
+     
+    // Products YG MASIH RELOAD PAGE
     public function products()
     {
         $categoryModel = new ProductsModel();
         $data['categories'] = $categoryModel->findAll();
         $data['title'] = 'Produk';
-        // $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
+        
 
         return $this->loadView('admin/products', $data);
     }
@@ -239,7 +271,7 @@ class Admin extends BaseController
         $model = new GalleryModel();
         $data['galeris'] = $model->getGallery();
         $data['title'] = 'Galeri';
-        // $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
+        
 
         return $this->loadView('admin/gallery', $data);
     }
@@ -431,7 +463,7 @@ class Admin extends BaseController
         $model = new TestimonialsModel();
         $data['testimonials'] = $model->getTestimonials();
         $data['title'] = 'Testimonial';
-        // $data['current_uri'] = service('uri')->getSegment(2); // atau segment yang sesuai
+        
 
         return $this->loadView('admin/testimonials', $data);
     }
