@@ -14,15 +14,14 @@ class Admin extends BaseController
 
     private $logo;
     private $data;
-    
+
     public function __construct()
     {
         // parent::__construct();
         $settings = new SettingsModel();
         $this->logo = $settings->getSettings('logo')->getRow()->nilai;
-       
     }
-    
+
     public function index(): string
     {
         $data['title'] = 'Dashboard';
@@ -35,11 +34,16 @@ class Admin extends BaseController
     // Slider
     public function sliders(): string
     {
-        $model = new SliderModel();
-        $data['sliders'] = $model->findAll();
+        // $model = new SliderModel();
         $data['title'] = 'Pengaturan Slider';
-
         return $this->loadView('admin/sliders', $data);
+    }
+
+    public function slidersajax()
+    {
+        $model = new SliderModel();
+        $sliders = $model->findAll();
+        return $this->response->setJSON(['data' => $sliders]);
     }
 
     public function save_sliders()
@@ -53,13 +57,10 @@ class Admin extends BaseController
 
             $data = [
                 'img' => $imgName,
-                // 'title' => $this->request->getPost('title'),
-                // 'subtitle' => $this->request->getPost('subtitle'),
                 'is_active' => $this->request->getPost('status'),
             ];
 
             $model->insert($data);
-
             return $this->response->setJSON(['success' => 'File uploaded successfully']);
         }
 
@@ -70,12 +71,13 @@ class Admin extends BaseController
     {
         $model = new SliderModel();
         $id = $this->request->getPost('id');
-        $status = $this->request->getPost('status');
+        $status = $this->request->getPost('is_active');
 
-        $model->update($id, ['is_active' => $status]);
+        $model->update($id, ['is_active' => $status, 'updated_at' => NULL]);
 
         return $this->response->setJSON(['success' => 'Status updated successfully']);
     }
+
 
     public function delete_sliders()
     {
@@ -84,7 +86,10 @@ class Admin extends BaseController
 
         $slider = $model->find($id);
         if ($slider) {
-            unlink('uploads/slider/' . $slider['img']);
+            $filePath = 'uploads/slider/' . $slider['img'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
             $model->delete($id);
             return $this->response->setJSON(['success' => 'Slider deleted successfully']);
         }
@@ -92,22 +97,23 @@ class Admin extends BaseController
         return $this->response->setJSON(['error' => 'Slider not found']);
     }
 
-     //BARU UNTUK PENANGANAN PRODUK BERBASIS AJAX (TANPA RELOAD PAGE)
-     public function products2() 
-     {
-         $data['title'] = 'Produk';
-     
-         return $this->loadView('admin/products2', $data);
-     }
- 
-     public function products2ajax() 
-     {
-         $productsModel = new ProductsModel();
-         $dataProducts = $productsModel->findAll();
-         echo json_encode(['data' => $dataProducts]);
-     }
 
-     public function deleteProduct2()
+    //BARU UNTUK PENANGANAN PRODUK BERBASIS AJAX (TANPA RELOAD PAGE)
+    public function products2()
+    {
+        $data['title'] = 'Produk';
+
+        return $this->loadView('admin/products2', $data);
+    }
+
+    public function products2ajax()
+    {
+        $productsModel = new ProductsModel();
+        $dataProducts = $productsModel->findAll();
+        echo json_encode(['data' => $dataProducts]);
+    }
+
+    public function deleteProduct2()
     {
         $request = $this->request->getPost();
         $id = $request['id'];
@@ -121,16 +127,16 @@ class Admin extends BaseController
             return $this->response->setJSON(['status' => 'error']);
         }
     }
- 
-     // ENDING AJAX PRODUK
-     
+
+    // ENDING AJAX PRODUK
+
     // Products YG MASIH RELOAD PAGE
     public function products()
     {
         $categoryModel = new ProductsModel();
         $data['categories'] = $categoryModel->findAll();
         $data['title'] = 'Produk';
-        
+
 
         return $this->loadView('admin/products', $data);
     }
@@ -248,7 +254,6 @@ class Admin extends BaseController
         } else {
             return $this->response->setJSON(['success' => false, 'errors' => ['No data to update']]);
         }
-
     }
 
 
@@ -271,9 +276,16 @@ class Admin extends BaseController
         $model = new GalleryModel();
         $data['galeris'] = $model->getGallery();
         $data['title'] = 'Galeri';
-        
+
 
         return $this->loadView('admin/gallery', $data);
+    }
+
+    public function galleryajax()
+    {
+        $model = new GalleryModel();
+        $gallery = $model->getGallery();
+        return $this->response->setJSON(['data' => $gallery]);
     }
 
     public function save_gallery()
@@ -304,7 +316,7 @@ class Admin extends BaseController
     {
         $model = new GalleryModel();
         $id = $this->request->getPost('id');
-        $status = $this->request->getPost('status');
+        $status = $this->request->getPost('is_active');
 
         $model->update($id, ['is_active' => $status]);
 
@@ -345,7 +357,7 @@ class Admin extends BaseController
 
         // Mendapatkan data setting dari database (hanya nomor 11 - 15)
         $model = new SettingsModel();
-        $parameters = ['text-tentang', 'text-produk', 'text-galeri', 'text-kontak', 'text-slider'];
+        $parameters = ['text-tentang', 'text-produk', 'text-galeri', 'text-kontak', 'text-slider', 'text-welcome'];
 
         $data['setting'] = $model->getSpecificSettings($parameters);
 
@@ -356,7 +368,7 @@ class Admin extends BaseController
     {
         $model = new SettingsModel();
 
-        $parameters = ['text-tentang', 'text-produk', 'text-galeri', 'text-kontak', 'text-slider'];
+        $parameters = ['text-tentang', 'text-produk', 'text-galeri', 'text-kontak', 'text-slider', 'text-welcome'];
         $errors = [];
 
         foreach ($parameters as $param) {
@@ -463,7 +475,7 @@ class Admin extends BaseController
         $model = new TestimonialsModel();
         $data['testimonials'] = $model->getTestimonials();
         $data['title'] = 'Testimonial';
-        
+
 
         return $this->loadView('admin/testimonials', $data);
     }
@@ -523,7 +535,7 @@ class Admin extends BaseController
         $data['current_uri'] = $uri->getSegment(2); // Ambil segmen kedua dari URI
         $data['logo'] = $this->logo;
         $data['txtpaneladmin'] = "Panel Administrator";
-       
+
         return view($viewName, $data);
     }
 }

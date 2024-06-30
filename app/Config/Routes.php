@@ -26,11 +26,12 @@ $routes->get('/admin/sliders', 'Admin::sliders');
 $routes->post('/admin/status_sliders', 'Admin::status_sliders');
 $routes->post('/admin/save_sliders', 'Admin::save_sliders');
 $routes->post('/admin/delete_sliders', 'Admin::delete_sliders');
+$routes->get('/admin/slidersajax', 'Admin::slidersajax');
 
-// Routes Kategori Produk
+// Routes Produk
 $routes->get('/admin/products2', 'Admin::products2');
 $routes->get('/admin/products2ajax', 'Admin::products2ajax');
-$routes->post('admin/deleteProduct2','Admin::deleteProduct2');
+$routes->post('admin/deleteProduct2', 'Admin::deleteProduct2');
 
 $routes->get('/admin/products', 'Admin::products2');
 // $routes->get('/admin/delete_products/(:num)', 'Admin::delete_products/$1');
@@ -52,6 +53,8 @@ $routes->post('/admin/save_gallery', 'Admin::save_gallery');
 $routes->post('/admin/delete_gallery', 'Admin::delete_gallery');
 $routes->post('/admin/upload', 'Admin::upload');
 $routes->get('/admin/upload', 'Admin::upload');
+// $routes->post('/admin/galleryajax', 'Admin::galleryajax');
+$routes->get('admin/galleryajax', 'Admin::galleryajax');
 
 // Routes Testimonials
 $routes->get('/admin/testimonials', 'Admin::testimonials');

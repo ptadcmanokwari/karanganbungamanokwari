@@ -34,7 +34,7 @@ dipake simpan style dari backend
 }
 
 .dropzone {
-  
+
     border: 2px dashed #ff78af !important;
     border-radius: 5px !important;
     background: #fdecf3 !important;
@@ -107,10 +107,11 @@ div#galeriImage .dz-preview.dz-image-preview {
     border-color: #fe86f3 !important;
 }
 
-.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary
-{
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary,
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary {
     background: #ff78af;
 }
+
 .btn-pink {
     background-color: #ff78af;
     color: #fff;
@@ -134,3 +135,35 @@ div#galeriImage .dz-preview.dz-image-preview {
     border: 0px;
 }
 
+.sidebar_close_icon i {
+    width: 40px;
+    height: 40px;
+    right: 5px;
+    font-size: 25px;
+    top: 5px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #ff78af;
+    border-radius: 5px;
+}
+
+.sidebar {
+    /* height: 96vh; */
+    padding-bottom: 50px;
+    position: fixed;
+    width: 270px !important;
+    z-index: 999;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: .5s;
+    /* margin: 2vh 2vw; */
+    border-radius: 0 10px 10px 0;
+}
+
+@media (max-width: 991px) {
+    .sidebar .logo {
+        padding: 24px 0;
+        margin: 45px 0px 8px 0;
+        font-weight: bold !important;
+    }
+}
