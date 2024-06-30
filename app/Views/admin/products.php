@@ -49,11 +49,11 @@
                                             <?= $category['is_popular'] ? 'checked' : '' ?>>
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary btn-sm text-white edit-product"
+                                        <button class="btn btn-ubah btn-sm text-white edit-product"
                                             data-id="<?= $category['id'] ?>" data-nama="<?= esc($category['nama']) ?>"
                                             data-gambar="<?= esc($category['gambar']) ?>"
                                             data-harga="<?= esc($category['harga']) ?>">Ubah</button>
-                                        <button class="btn btn-danger btn-sm delete-product"
+                                        <button class="btn btn-secondary btn-sm delete-product"
                                             data-id="<?= $category['id'] ?>">Hapus</button>
                                     </td>
                                 </tr>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Unggah Produk</button>
+                        <button type="submit" class="btn btn-pink">Unggah Produk</button>
                     </div>
                 </form>
             </div>
@@ -131,7 +131,7 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <span>Gambar Baru Produk</span>
-                                <div class="dropzone" id="editGambarKategori"></div>
+                                <div class="dropzone dzpink" id="editGambarKategori"></div>
                             </div>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                         <input class="form-control" type="hidden" name="is_popular" id="editIsPopular" value="0">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Perbarui Produk</button>
+                        <button type="submit" class="btn btn-ubah">Perbarui Produk</button>
                     </div>
                 </form>
             </div>
@@ -185,6 +185,7 @@ $(document).ready(function() {
         ],
 
         "drawCallback": function(settings) {
+
             $('#tabelProduk .edit-product').on('click', function() {
                 var categoryId = $(this).data('id');
                 var categoryNama = $(this).data('nama');
@@ -245,8 +246,8 @@ $(document).ready(function() {
                     text: "Aksi ini tidak dapat dibatalkan!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#ff78af',
+                    cancelButtonColor: '#5c636a',
                     confirmButtonText: 'Ya, Hapus!'
                 }).then((result) => {
                     if (result.isConfirmed) {

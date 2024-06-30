@@ -10,7 +10,8 @@
                         <h4>Tabel Galeri</h4>
                         <div class="box_right d-flex lms_block">
                             <div class="add_button ms-2">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#addNewTestimonial" class="btn_1">Tambah
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#addNewTestimonial"
+                                    class="btn_1">Tambah
                                     Testimoni Baru</a>
                             </div>
                         </div>
@@ -28,22 +29,28 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($testimonials as $index => $testi) : ?>
-                                    <tr style="text-align:center;">
-                                        <td><?= $index + 1 ?></td>
-                                        <td>
-                                            <div class="zoom-container">
-                                                <a href="<?= base_url('uploads/testimonials/' . $testi['gambar']) ?>" data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                                                    <img class="w-100 zoom-in img-thumbnail" src="<?= base_url('uploads/testimonials/' . $testi['gambar']) ?>" alt="Testimoni Image">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" class="status-toggle" data-size="normal" data-on-text="Active" data-off-text="Inactive" data-id="<?= $testi['id'] ?>" <?= $testi['is_active'] ? 'checked' : '' ?>>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger btn-sm delete-testimoni" data-id="<?= $testi['id'] ?>">Hapus</button>
-                                        </td>
-                                    </tr>
+                                <tr style="text-align:center;">
+                                    <td><?= $index + 1 ?></td>
+                                    <td>
+                                        <div class="zoom-container">
+                                            <a href="<?= base_url('uploads/testimonials/' . $testi['gambar']) ?>"
+                                                data-gallery="portfolio-gallery-app" class="glightbox preview-link">
+                                                <img class="w-100 zoom-in img-thumbnail"
+                                                    src="<?= base_url('uploads/testimonials/' . $testi['gambar']) ?>"
+                                                    alt="Testimoni Image">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="status-toggle" data-size="normal"
+                                            data-on-text="Active" data-off-text="Inactive" data-id="<?= $testi['id'] ?>"
+                                            <?= $testi['is_active'] ? 'checked' : '' ?>>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-secondary btn-sm delete-testimoni"
+                                            data-id="<?= $testi['id'] ?>">Hapus</button>
+                                    </td>
+                                </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -55,7 +62,8 @@
 </div>
 
 <!-- The Modal -->
-<div class="modal fade" id="addNewTestimonial" tabindex="-1" aria-labelledby="addNewTestimonialLabel" aria-hidden="true">
+<div class="modal fade" id="addNewTestimonial" tabindex="-1" aria-labelledby="addNewTestimonialLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -73,7 +81,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Unggah Galeri</button>
+                        <button type="submit" class="btn btn-pink">Unggah Galeri</button>
                     </div>
                 </form>
 
@@ -85,157 +93,157 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    Dropzone.autoDiscover = false;
+Dropzone.autoDiscover = false;
 
-    $(document).ready(function() {
+$(document).ready(function() {
 
-        $('#tabelTestimoni').DataTable({
-            "searching": false,
-            "bStateSave": true,
-            "info": false,
-            "destroy": true,
-            "columnDefs": [{
-                    targets: [1],
-                    sortable: false
-                },
-                {
-                    targets: [2],
-                    sortable: false
-                },
-            ],
-
-            "drawCallback": function(settings) {
-                $('.delete-testimoni').on('click', function() {
-                    var testiID = $(this).data('id');
-
-                    Swal.fire({
-                        title: 'Anda yakin?',
-                        text: "Aksi ini tidak dapat dibatalkan!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ya, Hapus!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: "<?= base_url('admin/delete_testimonials'); ?>",
-                                type: "POST",
-                                data: {
-                                    id: testiID
-                                },
-                                success: function(response) {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Berhasil!',
-                                        text: 'Testimoni telah dihapus.',
-                                    }).then(() => {
-                                        location.reload();
-                                    });
-                                },
-                                error: function() {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Gagal',
-                                        text: 'Testimoni belum dihapus.',
-                                    });
-                                }
-                            });
-                        }
-                    });
-                });
-
-                $('#tabelTestimoni .status-toggle').bootstrapSwitch();
-                $('#tabelTestimoni .show-home-toggle').bootstrapSwitch();
-
-                $('#tabelTestimoni .status-toggle').on('switchChange.bootstrapSwitch', function(event,
-                    state) {
-                    var testimoniID = $(this).data('id');
-                    var newStatus = state ? 1 : 0;
-
-                    $.ajax({
-                        url: "<?= base_url('admin/status_testimonials'); ?>",
-                        type: "POST",
-                        data: {
-                            id: testimoniID,
-                            status: newStatus
-                        },
-                        success: function(response) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Berhasil',
-                                text: 'Status telah diperbarui.',
-                                timer: 1000, // Auto-close after 3 seconds
-                                timerProgressBar: true,
-                                showConfirmButton: false // Hide the default "OK" button
-                            });
-                        },
-                        error: function() {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Gagal',
-                                text: 'Status belum diperbarui.',
-                                timer: 1000, // Auto-close after 3 seconds
-                                timerProgressBar: true,
-                                showConfirmButton: false // Hide the default "OK" button
-                            });
-                        }
-                    });
-                });
-
+    $('#tabelTestimoni').DataTable({
+        "searching": false,
+        "bStateSave": true,
+        "info": false,
+        "destroy": true,
+        "columnDefs": [{
+                targets: [1],
+                sortable: false
             },
-        });
+            {
+                targets: [2],
+                sortable: false
+            },
+        ],
 
-        var gbrTestimoniDropzone = new Dropzone("#gbrTestimoni", {
-            url: "<?= base_url('admin/save_testimonials'); ?>",
-            maxFiles: null,
-            acceptedFiles: 'image/*',
-            addRemoveLinks: true,
-            dictDefaultMessage: "Seret gambar ke sini untuk unggah",
-            autoProcessQueue: false,
-            resizeQuality: 0.6,
-            parallelUploads: 10,
+        "drawCallback": function(settings) {
+            $('.delete-testimoni').on('click', function() {
+                var testiID = $(this).data('id');
 
-            checkOrientation: true,
-            maxWidth: 8192,
-            maxHeight: 8192,
-            quality: 0.5,
-            init: function() {
-                var dz = this;
-
-                $("#TestimonialsUploadForm").on("submit", function(e) {
-                    e.preventDefault();
-                    dz.processQueue();
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text: "Aksi ini tidak dapat dibatalkan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ff78af',
+                    cancelButtonColor: '#5c636a',
+                    confirmButtonText: 'Ya, Hapus!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "<?= base_url('admin/delete_testimonials'); ?>",
+                            type: "POST",
+                            data: {
+                                id: testiID
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil!',
+                                    text: 'Testimoni telah dihapus.',
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: 'Testimoni belum dihapus.',
+                                });
+                            }
+                        });
+                    }
                 });
+            });
 
-                this.on("sending", function(file, xhr, formData) {
-                    formData.append("status", $("input[name='status']").val());
+            $('#tabelTestimoni .status-toggle').bootstrapSwitch();
+            $('#tabelTestimoni .show-home-toggle').bootstrapSwitch();
+
+            $('#tabelTestimoni .status-toggle').on('switchChange.bootstrapSwitch', function(event,
+                state) {
+                var testimoniID = $(this).data('id');
+                var newStatus = state ? 1 : 0;
+
+                $.ajax({
+                    url: "<?= base_url('admin/status_testimonials'); ?>",
+                    type: "POST",
+                    data: {
+                        id: testimoniID,
+                        status: newStatus
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Status telah diperbarui.',
+                            timer: 1000, // Auto-close after 3 seconds
+                            timerProgressBar: true,
+                            showConfirmButton: false // Hide the default "OK" button
+                        });
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: 'Status belum diperbarui.',
+                            timer: 1000, // Auto-close after 3 seconds
+                            timerProgressBar: true,
+                            showConfirmButton: false // Hide the default "OK" button
+                        });
+                    }
                 });
+            });
 
-                this.on("queuecomplete", function() {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil',
-                        text: 'Testimoni baru telah diunggah',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $('#addNewTestimonial').modal('hide');
-                            location.reload();
-                        }
-                    });
-                });
-
-                this.on("error", function(file, response) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Gagal',
-                        text: 'Testimoni baru tidak berhasil diunggah',
-                    });
-                });
-            }
-        });
-
+        },
     });
+
+    var gbrTestimoniDropzone = new Dropzone("#gbrTestimoni", {
+        url: "<?= base_url('admin/save_testimonials'); ?>",
+        maxFiles: null,
+        acceptedFiles: 'image/*',
+        addRemoveLinks: true,
+        dictDefaultMessage: "Seret gambar ke sini untuk unggah",
+        autoProcessQueue: false,
+        resizeQuality: 0.6,
+        parallelUploads: 10,
+
+        checkOrientation: true,
+        maxWidth: 8192,
+        maxHeight: 8192,
+        quality: 0.5,
+        init: function() {
+            var dz = this;
+
+            $("#TestimonialsUploadForm").on("submit", function(e) {
+                e.preventDefault();
+                dz.processQueue();
+            });
+
+            this.on("sending", function(file, xhr, formData) {
+                formData.append("status", $("input[name='status']").val());
+            });
+
+            this.on("queuecomplete", function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Testimoni baru telah diunggah',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#addNewTestimonial').modal('hide');
+                        location.reload();
+                    }
+                });
+            });
+
+            this.on("error", function(file, response) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Testimoni baru tidak berhasil diunggah',
+                });
+            });
+        }
+    });
+
+});
 </script>
 
 

@@ -57,6 +57,7 @@
     <link rel="stylesheet" href="<?= base_url(); ?>backend/css/colors/default.css" id="colorSkinCSS">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" rel="stylesheet">
 
     <!-- Swall -->
@@ -65,112 +66,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css"
         rel="stylesheet">
     <link href="<?= base_url(); ?>frontend/assets/vendors/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <style>
-    @media only screen and (max-width: 992px) {
-        .header_iner.d-flex.justify-content-between.align-items-center {
-            background-color: #ff78af !important;
-            padding: 10px;
-        }
-
-        .sidebar_icon i {
-            font-size: 25px;
-            color: #fff;
-        }
-
-        .header_notification_warp.d-flex.align-items-center i {
-            color: #fff;
-        }
-
-        .white_box_tittle.list_header {
-            display: flex;
-            align-items: center !important;
-        }
-
-        .white_box_tittle.list_header h4,
-        .box_right.d-flex.lms_block .add_button.ms-2 {
-            margin: 0;
-        }
-    }
-
-    .sidebar #sidebar_menu li.mm-active>a {
-        color: #1f253a;
-        font-weight: bold;
-    }
-
-    .dropzone {
-        border: 2px dashed #007bff;
-        border-radius: 5px;
-        background: white;
-    }
-
-    div#sliderImage {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    i.bi.bi-grid-fill.ml-2 {
-        margin: 0 !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* Slider, galeri, produk */
-    .zoom-container {
-        overflow: hidden;
-        width: 100%;
-        /* height: 230px; */
-        position: relative;
-    }
-
-    .zoom-in {
-        transition: transform 0.3s ease;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .zoom-in:hover {
-        transform: scale(1.5);
-    }
-
-    /* gambar Produk */
-    #tabelTestimoni img,
-    #tabelSlider img,
-    #tabelGaleri img,
-    #tabelProduk img {
-        height: 150px !important;
-        object-fit: cover;
-    }
-
-    #panduanPanelAdmin i {
-        margin-right: 10px !important;
-    }
-
-    div#galeriImage .dz-preview.dz-image-preview {
-        margin: 5px !important;
-    }
-
-    .header_iner .header_right .header_notification_warp li a {
-        font-size: 14px;
-        color: white;
-        position: relative;
-        margin-right: 29px;
-        display: inline-block;
-    }
-
-    .accordion-button:not(.collapsed) {
-        color: #ff78af !important;
-        background-color: #fff7fa !important;
-        box-shadow: none !important;
-    }
-
-    .accordion-button:focus {
-        border-color: #fe86f3 !important;
-    }
-    </style>
-
+    <link href="<?= base_url(); ?>assets/palingcustombackend.css" rel="stylesheet">
 
 </head>
 
@@ -178,7 +74,8 @@
 
     <nav class="sidebar">
         <div class="logo d-flex justify-content-between">
-            <a href="<?= base_url(); ?>admin"><img src="<?= base_url(); ?>backend/img/logo.png" alt></a>
+            <!-- <a href="<?= base_url(); ?>admin"><img src="<?= base_url(); ?>backend/img/logo.png" alt></a> -->
+            <h2>Panel Admin</h2>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>
