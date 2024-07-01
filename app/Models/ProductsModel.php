@@ -8,9 +8,6 @@ class ProductsModel extends Model
 {
     protected $table = 't_products';
     protected $primaryKey = 'id';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $useTimestamps = true;
     protected $allowedFields = ['nama', 'gambar', 'harga', 'is_popular'];
 
     // Metode untuk menyimpan data kategori

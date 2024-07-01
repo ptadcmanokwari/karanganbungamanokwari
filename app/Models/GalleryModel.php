@@ -8,9 +8,6 @@ class GalleryModel extends Model
 {
     protected $table = 't_gallery';
     protected $primaryKey = 'id';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $useTimestamps = true;
     protected $allowedFields = ['img', 'is_active', 'is_show_home', 'kategori'];
 
     public function getGallery($is_active = NULL, $is_show_home = NULL)
