@@ -25,6 +25,7 @@ $routes->get('/admin/system_setting', 'Admin::system_setting');
 $routes->get('/admin/sliders', 'Admin::sliders');
 $routes->post('/admin/status_sliders', 'Admin::status_sliders');
 $routes->post('/admin/save_sliders', 'Admin::save_sliders');
+$routes->get('/admin/save_sliders', 'Admin::save_sliders');
 $routes->post('/admin/delete_sliders', 'Admin::delete_sliders');
 $routes->get('/admin/slidersajax', 'Admin::slidersajax');
 

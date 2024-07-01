@@ -71,35 +71,24 @@
     Dropzone.autoDiscover = false;
 
     $(document).ready(function() {
-        // Inisialisasi DataTables
-        var tableSliders = $('#tabelSlider').DataTable({
+        var table = $('#tabelSlider').DataTable({
             ajax: '<?= base_url('admin/slidersajax') ?>',
             "searching": false,
             "bStateSave": true,
             "info": false,
-
             "columnDefs": [{
                     "className": "dt-center",
                     "targets": "_all"
                 },
                 {
-                    targets: [1],
-                    sortable: false
-                },
-                {
-                    targets: [2],
-                    sortable: false
-                },
-                {
-                    targets: [-1],
+                    targets: [1, 2, -1],
                     sortable: false
                 }
             ],
-
             columns: [{
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        return meta.row + 1; // Mengembalikan nomor urut dari baris
+                        return meta.row + 1;
                     }
                 },
                 {
@@ -112,11 +101,9 @@
                     "data": null,
                     "render": function(data, type, row) {
                         if (row.is_active == 1) {
-                            return '<input name="is_active" type="checkbox" class="is_active" data-id="' +
-                                row.id + '" checked>';
+                            return '<input name="is_active" type="checkbox" class="is_active" data-id="' + row.id + '" checked>';
                         } else {
-                            return '<input name="is_active" type="checkbox" class="is_active" data-id="' +
-                                row.id + '">';
+                            return '<input name="is_active" type="checkbox" class="is_active" data-id="' + row.id + '">';
                         }
                     }
                 },
@@ -129,14 +116,11 @@
             ]
         });
 
-        // Inisialisasi ulang Bootstrap Switch dan pengikatan event handler saat tabel di-render ulang
-        tableSliders.on('draw.dt', function() {
-            var lightbox = GLightbox({
+        table.on('draw.dt', function() {
+            GLightbox({
                 selector: '.glightbox'
             });
-
             $('#tabelSlider .is_active').bootstrapSwitch();
-
             $('#tabelSlider .is_active').on('switchChange.bootstrapSwitch', function(event, state) {
                 var sliderId = $(this).data('id');
                 var newStatus = state ? 1 : 0;
@@ -152,9 +136,9 @@
                             icon: 'success',
                             title: 'Berhasil',
                             text: 'Status telah berubah.',
-                            timer: 1000, // Auto-close after 3 seconds
+                            timer: 1000,
                             timerProgressBar: true,
-                            showConfirmButton: false // Hide the default "OK" button
+                            showConfirmButton: false
                         });
                     },
                     error: function() {
@@ -162,9 +146,9 @@
                             icon: 'error',
                             title: 'Gagal',
                             text: 'Status belum berubah.',
-                            timer: 1000, // Auto-close after 3 seconds
+                            timer: 1000,
                             timerProgressBar: true,
-                            showConfirmButton: false // Hide the default "OK" button
+                            showConfirmButton: false
                         });
                     }
                 });
@@ -202,8 +186,8 @@
                 });
 
                 this.on("sending", function(file, xhr, formData) {
-                    var status = $("input[name='status-toggle']").val(); // Ambil nilai status
-                    formData.append("status", status); // Sisipkan nilai status ke formData
+                    var status = $("input[name='status-toggle']").val();
+                    formData.append("status", status);
                 });
 
                 this.on("success", function(file, response) {
@@ -216,7 +200,7 @@
                     }).then((result) => {
                         $('#addSliderBaru').modal('hide');
                         resetModal();
-                        tableSliders.ajax.reload(null, false); // Reload data table
+                        table.ajax.reload(null, false);
                     });
                 });
 
@@ -292,23 +276,17 @@
                         success: function(response) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Berhasil',
+                                title: 'Berhasil!',
                                 text: 'Slider telah dihapus.',
-                                timer: 1000, // Auto-close after 3 seconds
-                                timerProgressBar: true,
-                                showConfirmButton: false // Hide the default "OK" button
-                            }).then((result) => {
-                                tableSliders.ajax.reload(null, false); // Reload data table
+                            }).then(() => {
+                                table.ajax.reload(null, false);
                             });
                         },
                         error: function() {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Gagal',
-                                text: 'Slider belum dihapus.',
-                                timer: 1000, // Auto-close after 3 seconds
-                                timerProgressBar: true,
-                                showConfirmButton: false // Hide the default "OK" button
+                                text: 'Slider belum dihapus',
                             });
                         }
                     });
@@ -317,4 +295,5 @@
         });
     });
 </script>
+
 <?= $this->endSection() ?>

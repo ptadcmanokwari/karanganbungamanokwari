@@ -34,7 +34,6 @@ class Admin extends BaseController
     // Slider
     public function sliders(): string
     {
-        // $model = new SliderModel();
         $data['title'] = 'Pengaturan Slider';
         return $this->loadView('admin/sliders', $data);
     }
@@ -73,11 +72,10 @@ class Admin extends BaseController
         $id = $this->request->getPost('id');
         $status = $this->request->getPost('is_active');
 
-        $model->update($id, ['is_active' => $status, 'updated_at' => NULL]);
+        $model->update($id, ['is_active' => $status]);
 
         return $this->response->setJSON(['success' => 'Status updated successfully']);
     }
-
 
     public function delete_sliders()
     {
@@ -96,6 +94,7 @@ class Admin extends BaseController
 
         return $this->response->setJSON(['error' => 'Slider not found']);
     }
+
 
 
     //BARU UNTUK PENANGANAN PRODUK BERBASIS AJAX (TANPA RELOAD PAGE)

@@ -8,6 +8,9 @@ class TestimonialsModel extends Model
 {
     protected $table = 't_testimoni';
     protected $primaryKey = 'id';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $useTimestamps = true;
     protected $allowedFields = ['gambar', 'is_active'];
 
     public function getTestimonials($id = null)

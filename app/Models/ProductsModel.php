@@ -6,9 +6,12 @@ use CodeIgniter\Model;
 
 class ProductsModel extends Model
 {
-    protected $table = 't_products'; // Nama tabel di database
+    protected $table = 't_products';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['nama', 'gambar', 'harga', 'is_popular']; // Atribut yang dapat diisi
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $useTimestamps = true;
+    protected $allowedFields = ['nama', 'gambar', 'harga', 'is_popular'];
 
     // Metode untuk menyimpan data kategori
     public function saveProduct($data)
@@ -24,6 +27,4 @@ class ProductsModel extends Model
             return $this->getWhere(['id' => $id]);
         }
     }
-
-    
 }
