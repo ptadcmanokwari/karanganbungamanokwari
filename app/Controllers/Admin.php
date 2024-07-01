@@ -476,8 +476,14 @@ class Admin extends BaseController
         $data['testimonials'] = $model->getTestimonials();
         $data['title'] = 'Testimonial';
 
-
         return $this->loadView('admin/testimonials', $data);
+    }
+
+    public function testimonialsajax()
+    {
+        $model = new TestimonialsModel();
+        $testimonials = $model->getTestimonials();
+        return $this->response->setJSON(['data' => $testimonials]);
     }
 
     public function save_testimonials()
@@ -506,7 +512,7 @@ class Admin extends BaseController
     {
         $model = new TestimonialsModel();
         $id = $this->request->getPost('id');
-        $status = $this->request->getPost('status');
+        $status = $this->request->getPost('is_active');
 
         $model->update($id, ['is_active' => $status]);
 

@@ -72,7 +72,7 @@
 
     $(document).ready(function() {
         // Inisialisasi DataTables
-        var table = $('#tabelSlider').DataTable({
+        var tableSliders = $('#tabelSlider').DataTable({
             ajax: '<?= base_url('admin/slidersajax') ?>',
             "searching": false,
             "bStateSave": true,
@@ -130,7 +130,7 @@
         });
 
         // Inisialisasi ulang Bootstrap Switch dan pengikatan event handler saat tabel di-render ulang
-        table.on('draw.dt', function() {
+        tableSliders.on('draw.dt', function() {
             var lightbox = GLightbox({
                 selector: '.glightbox'
             });
@@ -216,7 +216,7 @@
                     }).then((result) => {
                         $('#addSliderBaru').modal('hide');
                         resetModal();
-                        table.ajax.reload(null, false); // Reload data table
+                        tableSliders.ajax.reload(null, false); // Reload data table
                     });
                 });
 
@@ -270,10 +270,6 @@
             }, 'image/webp');
         });
 
-        $('#addGalleryCroping').on('hidden.bs.modal', function() {
-            resetModal();
-        });
-
         $('#tabelSlider').on('click', '.delete-slider', function() {
             var sliderId = $(this).data('id');
 
@@ -296,17 +292,23 @@
                         success: function(response) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Berhasil!',
+                                title: 'Berhasil',
                                 text: 'Slider telah dihapus.',
-                            }).then(() => {
-                                table.ajax.reload(null, false);
+                                timer: 1000, // Auto-close after 3 seconds
+                                timerProgressBar: true,
+                                showConfirmButton: false // Hide the default "OK" button
+                            }).then((result) => {
+                                tableSliders.ajax.reload(null, false); // Reload data table
                             });
                         },
                         error: function() {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Gagal',
-                                text: 'Slider belum dihapus',
+                                text: 'Slider belum dihapus.',
+                                timer: 1000, // Auto-close after 3 seconds
+                                timerProgressBar: true,
+                                showConfirmButton: false // Hide the default "OK" button
                             });
                         }
                     });

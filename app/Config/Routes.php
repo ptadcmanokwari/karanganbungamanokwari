@@ -62,6 +62,7 @@ $routes->post('/admin/save_testimonials', 'Admin::save_testimonials');
 $routes->post('/admin/status_testimonials', 'Admin::status_testimonials');
 $routes->get('/admin/save_testimonials', 'Admin::save_testimonials');
 $routes->post('/admin/delete_testimonials', 'Admin::delete_testimonials');
+$routes->get('admin/testimonialsajax', 'Admin::testimonialsajax');
 
 // Page setting
 $routes->get('/admin/page-setting', 'Admin::page_setting');
