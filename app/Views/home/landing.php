@@ -11,6 +11,7 @@
     <meta name="keywords" content="karangan papan bunga, jasa pembuatan bunga papan, desain papan bunga, papan bunga pernikahan, papan bunga ucapan selamat, papan bunga duka cita, bunga papan murah">
     <meta name="author" content="Karangan Bunga Manokwari">
     <meta name="robots" content="index, follow">
+    <meta name="thumbnail" content="<?= base_url(); ?>uploads/karanganbungamanokwari.webp">
     <meta property="og:title" content="Karangan Bunga Manokwari">
     <meta property="og:description" content="Jasa pembuatan karangan papan bunga untuk berbagai acara dan momen. Desain elegan dan bahan berkualitas tinggi untuk pernikahan, ucapan selamat, acara duka cita, dan lainnya. Pesan sekarang untuk pengiriman cepat dan pelayanan terbaik.">
     <meta property="og:image" content="<?= base_url(); ?>uploads/karanganbungamanokwari.webp">
