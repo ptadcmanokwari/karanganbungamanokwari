@@ -16,16 +16,15 @@
                     <div class="row">
 
                         <?php foreach ($setting as $item) : ?>
-                        <input type="hidden" name="id" value="<?= $item['id'] ?>">
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label" for="<?= $item['parameter'] ?>">
-                                    <?= ucwords(str_replace('-', ' ', $item['parameter'])); ?>
-                                </label>
-                                <textarea class="form-control" id="<?= $item['parameter'] ?>"
-                                    name="<?= $item['parameter'] ?>"><?= $item['nilai']; ?></textarea>
+                            <input type="hidden" name="id" value="<?= $item['id'] ?>">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="<?= $item['parameter'] ?>">
+                                        <?= ucwords(str_replace('-', ' ', $item['parameter'])); ?>
+                                    </label>
+                                    <textarea class="form-control" id="<?= $item['parameter'] ?>" name="<?= $item['parameter'] ?>"><?= $item['nilai']; ?></textarea>
+                                </div>
                             </div>
-                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -44,36 +43,36 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-$('#pageSettingForm').submit(function(e) {
-    e.preventDefault();
-    console.log('Form submitted'); // Debugging line
+    $('#pageSettingForm').submit(function(e) {
+        e.preventDefault();
+        console.log('Form submitted'); // Debugging line
 
-    var form = $(this);
-    var url = "<?= base_url('admin/update_page_setting') ?>"; // Pastikan URL sesuai
+        var form = $(this);
+        var url = "<?= base_url('admin/update_page_setting') ?>"; // Pastikan URL sesuai
 
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: form.serialize(),
-        dataType: "json",
-        success: function(response) {
-            Swal.fire({
-                title: 'Sukses!',
-                text: response.message,
-                icon: 'success'
-            }).then(function() {
-                window.location.href = "<?= base_url('admin/page_setting') ?>";
-            });
-        },
-        error: function(response) {
-            Swal.fire({
-                title: 'Gagal!',
-                text: 'Terjadi kesalahan saat menyimpan data.',
-                icon: 'error'
-            });
-        }
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            dataType: "json",
+            success: function(response) {
+                Swal.fire({
+                    title: 'Sukses!',
+                    text: response.message,
+                    icon: 'success'
+                }).then(function() {
+                    window.location.href = "<?= base_url('admin/page_setting') ?>";
+                });
+            },
+            error: function(response) {
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Terjadi kesalahan saat menyimpan data.',
+                    icon: 'error'
+                });
+            }
+        });
     });
-});
 </script>
 
 
