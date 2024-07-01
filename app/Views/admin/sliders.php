@@ -276,8 +276,11 @@
                         success: function(response) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Berhasil!',
+                                title: 'Berhasil',
                                 text: 'Slider telah dihapus.',
+                                timer: 1000,
+                                timerProgressBar: true,
+                                showConfirmButton: false
                             }).then(() => {
                                 table.ajax.reload(null, false);
                             });
@@ -286,7 +289,10 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Gagal',
-                                text: 'Slider belum dihapus',
+                                text: 'Slider belum dihapus.',
+                                timer: 1000,
+                                timerProgressBar: true,
+                                showConfirmButton: false
                             });
                         }
                     });
