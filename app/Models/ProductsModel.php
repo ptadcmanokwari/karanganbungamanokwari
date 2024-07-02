@@ -19,7 +19,7 @@ class ProductsModel extends Model
     public function getProducts($id = false)
     {
         if ($id === false) {
-            return $this->findAll();
+            return $this->orderBy('created_at', 'desc')->findAll();
         } else {
             return $this->getWhere(['id' => $id]);
         }

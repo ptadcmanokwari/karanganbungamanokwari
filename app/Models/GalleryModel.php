@@ -14,6 +14,7 @@ class GalleryModel extends Model
     {
 
         $builder = $this->db->table('t_gallery');
+        $builder->orderBy('created_at', 'desc');
 
         if ($is_active != NULL) {
             $builder->where('is_active', $is_active);
@@ -28,6 +29,7 @@ class GalleryModel extends Model
     public function getGalleryCategory()
     {
         $builder = $this->db->table('t_gallery');
+        $builder->orderBy('kategori', 'desc');
         $builder->select('kategori');
         $builder->distinct();
         return $builder->get()->getResultArray();

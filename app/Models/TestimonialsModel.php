@@ -13,7 +13,7 @@ class TestimonialsModel extends Model
     public function getTestimonials($id = null)
     {
         if ($id === null) {
-            return $this->findAll();
+            return $this->orderBy('created_at', 'desc')->findAll();
         } else {
             return $this->find($id);
         }

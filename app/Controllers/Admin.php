@@ -25,8 +25,6 @@ class Admin extends BaseController
     public function index(): string
     {
         $data['title'] = 'Dashboard';
-        // $data['logo'] = 'frontend/assets/img/settings/logokarbumanokwari.png';
-        // $data['logo'] = $this->logo;
 
         return $this->loadView('admin/dashboard', $data);
     }
@@ -95,29 +93,26 @@ class Admin extends BaseController
         return $this->response->setJSON(['error' => 'Slider not found']);
     }
 
-
-
-    //BARU UNTUK PENANGANAN PRODUK BERBASIS AJAX (TANPA RELOAD PAGE)
-    public function products2()
+    public function products()
     {
         $data['title'] = 'Produk';
 
-        return $this->loadView('admin/products2', $data);
+        return $this->loadView('admin/products', $data);
     }
 
-    public function products2ajax()
+    public function productsajax()
     {
         $productsModel = new ProductsModel();
-        $dataProducts = $productsModel->findAll();
+        $dataProducts = $productsModel->orderBy('created_at', 'desc')->findAll();
         echo json_encode(['data' => $dataProducts]);
     }
 
-    public function deleteProduct2()
+    public function deleteProduct()
     {
         $request = $this->request->getPost();
         $id = $request['id'];
 
-        $productsModel = new ProductsModel(); // Ganti dengan model Anda
+        $productsModel = new ProductsModel();
         $delete = $productsModel->delete($id);
 
         if ($delete) {
@@ -125,19 +120,6 @@ class Admin extends BaseController
         } else {
             return $this->response->setJSON(['status' => 'error']);
         }
-    }
-
-    // ENDING AJAX PRODUK
-
-    // Products YG MASIH RELOAD PAGE
-    public function products()
-    {
-        $categoryModel = new ProductsModel();
-        $data['categories'] = $categoryModel->findAll();
-        $data['title'] = 'Produk';
-
-
-        return $this->loadView('admin/products', $data);
     }
 
     public function save_products()
@@ -156,7 +138,8 @@ class Admin extends BaseController
 
         $file = $this->request->getFile('file');
         if ($file->isValid() && !$file->hasMoved()) {
-            $newName = $file->getRandomName();
+            // $newName = $file->getRandomName();
+            $newName = url_title($this->request->getPost('nama'), '-', true).'-'.$file->getRandomName().'.'.$file->guessExtension();
             $file->move(FCPATH . 'uploads/products/', $newName);
 
             $categoryModel = new ProductsModel();
@@ -170,33 +153,6 @@ class Admin extends BaseController
             return $this->response->setJSON(['success' => true]);
         } else {
             return $this->response->setJSON(['success' => false, 'errors' => 'File upload failed.']);
-        }
-    }
-
-
-    public function delete_products($id)
-    {
-        $categoryModel = new ProductsModel();
-
-        // Ambil nama file gambar dari database
-        $category = $categoryModel->find($id);
-        if (!$category) {
-            return $this->response->setJSON(['success' => false]);
-        }
-
-        $gambar = $category['gambar'];
-
-        // Hapus entri kategori dari database
-        if ($categoryModel->delete($id)) {
-            // Hapus file gambar dari direktori
-            $gambarPath = FCPATH . 'uploads/products/' . $gambar;
-            if (file_exists($gambarPath)) {
-                unlink($gambarPath);
-            }
-
-            return $this->response->setJSON(['success' => true]);
-        } else {
-            return $this->response->setJSON(['success' => false]);
         }
     }
 
@@ -231,7 +187,8 @@ class Admin extends BaseController
 
         $file = $this->request->getFile('file');
         if ($file && $file->isValid() && !$file->hasMoved()) {
-            $newName = $file->getRandomName();
+            // $newName = $file->getRandomName();
+            $newName = url_title($this->request->getPost('nama'), '-', true).'-'.$file->getRandomName().'.'.$file->guessExtension();
             $file->move(FCPATH . 'uploads/products/', $newName);
 
             // Hapus gambar lama jika ada
@@ -254,8 +211,6 @@ class Admin extends BaseController
             return $this->response->setJSON(['success' => false, 'errors' => ['No data to update']]);
         }
     }
-
-
 
     public function toggleIsPopular()
     {
@@ -293,7 +248,8 @@ class Admin extends BaseController
         $file = $this->request->getFile('file');
 
         if ($file && $file->isValid() && !$file->hasMoved()) {
-            $imgName = $file->getRandomName();
+            // $imgName = $file->getRandomName();
+            $imgName = url_title($this->request->getPost('kategori'), '-', true).'-'.$file->getRandomName().'.'.$file->guessExtension();
             $file->move('uploads/gallery/', $imgName);
 
             $data = [
