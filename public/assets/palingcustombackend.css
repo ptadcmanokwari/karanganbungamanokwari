@@ -113,9 +113,9 @@ div#galeriImage .dz-preview.dz-image-preview {
 }
 
 .btn-pink {
-    background-color: #ff78af;
-    color: #fff;
-    border: 0px;
+    background-color: #ff78af !important;
+    color: #fff !important;
+    border: 0px !important;
 }
 
 .btn_1 {

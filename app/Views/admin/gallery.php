@@ -85,7 +85,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button class="btn btn-primary" id="cropBtn">Crop & Unggah Galeri</button>
+                <button class="btn btn-primary btn-pink" id="cropBtn">Unggah Galeri</button>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Unggah Galeri</button>
+                        <button type="submit" class="btn btn-pink">Unggah Galeri</button>
                     </div>
                 </form>
 

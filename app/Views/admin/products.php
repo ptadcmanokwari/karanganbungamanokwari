@@ -67,7 +67,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button class="btn btn-pink" id="addCropBtn">Crop & Unggah Slider</button>
+                    <button class="btn btn-pink" id="addCropBtn">Unggah Produk</button>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button class="btn btn-pink" id="editCropBtn">Crop & Unggah Slider</button>
+                    <button class="btn btn-pink" id="editCropBtn">Perbarui Produk</button>
                 </div>
             </div>
         </div>
@@ -442,7 +442,121 @@
         });
 
 
-        //dropzone edit produk
+        // //dropzone edit produk
+        // var editDropzone = new Dropzone("#editProduct", {
+        //     url: "<?= base_url('admin/update_products'); ?>",
+        //     acceptedFiles: 'image/*',
+        //     addRemoveLinks: true,
+        //     maxFiles: 1,
+        //     dictDefaultMessage: "Seret gambar ke sini untuk unggah",
+        //     autoProcessQueue: false,
+        //     init: function() {
+        //         var dz = this;
+        //         this.on("addedfile", function(file) {
+        //             var reader = new FileReader();
+        //             reader.onload = function(event) {
+        //                 var editcropContainer = document.getElementById('editcropContainer');
+        //                 var editcropImage = document.getElementById('editcropImage');
+        //                 editcropContainer.style.display = 'flex';
+        //                 editcropImage.src = event.target.result;
+        //                 if (cropper) {
+        //                     cropper.destroy();
+        //                 }
+        //                 cropper = new Cropper(editcropImage, {
+        //                     viewMode: 1,
+        //                     aspectRatio: 1 / 1,
+        //                     responsive: true,
+        //                     scalable: true,
+        //                     zoomable: true,
+        //                     autoCropArea: 0.5,
+        //                     movable: true,
+        //                     cropBoxResizable: true,
+        //                     toggleDragModeOnDblclick: false
+        //                 });
+        //             };
+        //             reader.readAsDataURL(file);
+        //         });
+
+        //         this.on("sending", function(file, xhr, formData) {
+        //             formData.append("id", document.querySelector("#editId").value);
+        //             formData.append("nama", document.querySelector("#editNama").value);
+        //             formData.append("harga", document.querySelector("#editHarga").value);
+        //             formData.append("is_popular", document.querySelector("#editIsPopular")
+        //                 .value);
+        //             if (editDropzone.getQueuedFiles().length > 0) {
+        //                 formData.append("file", file);
+        //             }
+        //         });
+
+        //         this.on("success", function(file, response) {
+        //             Swal.fire({
+        //                 icon: 'success',
+        //                 title: 'Upload Berhasil',
+        //                 timer: 1000,
+        //                 timerProgressBar: true,
+        //                 showConfirmButton: false
+        //             }).then((result) => {
+        //                 $('#editProductModal').modal('hide');
+        //                 resetEditModal();
+        //                 tableProducts.ajax.reload(null, false);
+        //             });
+        //         });
+
+        //         this.on("queuecomplete", function() {
+        //             resetEditModal();
+        //         });
+        //     }
+        // });
+
+
+        // var cropper;
+
+        // function resetEditModal() {
+        //     var editcropContainer = document.getElementById('editcropContainer');
+        //     var editCropImage = document.getElementById('editCropImage');
+        //     var editNama = document.getElementById('editNama');
+        //     var editHarga = document.getElementById('editHarga');
+
+        //     if (editcropContainer) {
+        //         editcropContainer.style.display = 'none';
+        //     }
+        //     if (editCropImage) {
+        //         editCropImage.src = '';
+        //     }
+
+        //     if (addDropzone) {
+        //         addDropzone.removeAllFiles();
+        //     }
+
+        //     if (editNama) {
+        //         editNama.value = '';
+        //     }
+        //     if (editHarga) {
+        //         editHarga.value = '';
+        //     }
+        //     if (editDropzone) {
+        //         editDropzone.removeAllFiles();
+        //     }
+        // }
+
+        // document.getElementById('editCropBtn').addEventListener('click', function() {
+        //     var croppedCanvas = cropper.getCroppedCanvas({
+        //         width: 1000,
+        //         height: 1000,
+        //         imageSmoothingEnabled: true,
+        //         imageSmoothingQuality: 'high'
+        //     });
+
+        //     croppedCanvas.toBlob(function(blob) {
+        //         var croppedFile = new File([blob], "cropped_image.jpg", {
+        //             type: "image/webp"
+        //         });
+        //         editDropzone.removeAllFiles();
+        //         editDropzone.addFile(croppedFile);
+        //         editDropzone.processQueue();
+        //     }, 'image/webp');
+        // });
+
         var editDropzone = new Dropzone("#editProduct", {
             url: "<?= base_url('admin/update_products'); ?>",
             acceptedFiles: 'image/*',
@@ -481,8 +595,7 @@
                     formData.append("id", document.querySelector("#editId").value);
                     formData.append("nama", document.querySelector("#editNama").value);
                     formData.append("harga", document.querySelector("#editHarga").value);
-                    formData.append("is_popular", document.querySelector("#editIsPopular")
-                        .value);
+                    formData.append("is_popular", document.querySelector("#editIsPopular").value);
                     if (editDropzone.getQueuedFiles().length > 0) {
                         formData.append("file", file);
                     }
@@ -507,7 +620,6 @@
                 });
             }
         });
-
 
         var cropper;
 
@@ -540,23 +652,53 @@
         }
 
         document.getElementById('editCropBtn').addEventListener('click', function() {
-            var croppedCanvas = cropper.getCroppedCanvas({
-                width: 1000,
-                height: 1000,
-                imageSmoothingEnabled: true,
-                imageSmoothingQuality: 'high'
-            });
-
-            croppedCanvas.toBlob(function(blob) {
-                var croppedFile = new File([blob], "cropped_image.jpg", {
-                    type: "image/webp"
+            if (editDropzone.getQueuedFiles().length > 0) {
+                var croppedCanvas = cropper.getCroppedCanvas({
+                    width: 1000,
+                    height: 1000,
+                    imageSmoothingEnabled: true,
+                    imageSmoothingQuality: 'high'
                 });
-                editDropzone.removeAllFiles();
-                editDropzone.addFile(croppedFile);
-                editDropzone.processQueue();
-            }, 'image/webp');
-        });
 
+                croppedCanvas.toBlob(function(blob) {
+                    var croppedFile = new File([blob], "cropped_image.jpg", {
+                        type: "image/webp"
+                    });
+                    editDropzone.removeAllFiles();
+                    editDropzone.addFile(croppedFile);
+                    editDropzone.processQueue();
+                }, 'image/webp');
+            } else {
+                // Form data manual submission
+                var formData = new FormData();
+                formData.append("id", document.querySelector("#editId").value);
+                formData.append("nama", document.querySelector("#editNama").value);
+                formData.append("harga", document.querySelector("#editHarga").value);
+                formData.append("is_popular", document.querySelector("#editIsPopular").value);
+
+                fetch("<?= base_url('admin/update_products'); ?>", {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Update Berhasil',
+                            timer: 1000,
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        }).then((result) => {
+                            $('#editProductModal').modal('hide');
+                            resetEditModal();
+                            tableProducts.ajax.reload(null, false);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        });
 
         function formatRupiah(angka, prefix) {
             var number_string = angka.replace(/[^,\d]/g, '').toString(),

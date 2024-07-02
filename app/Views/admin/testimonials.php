@@ -54,7 +54,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button class="btn btn-pink" id="cropBtn">Crop & Unggah Testimoni</button>
+                        <button class="btn btn-pink" id="cropBtn">Unggah Testimoni</button>
                     </div>
                 </div>
             </div>
