@@ -36,33 +36,33 @@
 </div>
 
 <!-- The Modal -->
-<div class="modal fade" id="addNewTestimonial" tabindex="-1" aria-labelledby="addNewTestimonialLabel" aria-hidden="true">
+<div class="modal fade" id="addNewTestimonial" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" tabindex="-1" aria-labelledby="addNewTestimonialLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addNewTestimonialLabel">Unggah Galeri Baru</h5>
+                <h5 class="modal-title" id="addNewTestimonialLabel">Unggah Testimoni Baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="TestimonialsUploadForm" action="<?= base_url('admin/save_testimonials'); ?>">
+                <div class="modal-body">
                     <div class="mb-3">
-                        <span>Gambar Tesimoni</span>
-                        <div class="dropzone" id="gbrTestimoni"></div>
+                        <span>Gambar Testimoni</span>
+                        <form action="<?= base_url('admin/save_testimonials') ?>" class="dropzone" id="sliderImage"></form>
                     </div>
-                    <!-- <div class="mb-3">
-                        <input class="form-control" type="hidden" name="status" id="status" value="1">
-                    </div> -->
+                    <div style="max-height: 400px; display: none;" id="cropContainer">
+                        <img id="cropImage">
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-pink">Unggah Galeri</button>
+                        <button class="btn btn-pink" id="cropBtn">Crop & Unggah Testimoni</button>
                     </div>
-                </form>
-
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -72,7 +72,7 @@
 
     $(document).ready(function() {
         // Inisialisasi DataTables
-        var tableTestimonils = $('#tabelTestimoni').DataTable({
+        var tableTestimoni = $('#tabelTestimoni').DataTable({
             ajax: '<?= base_url('admin/testimonialsajax') ?>',
             "searching": false,
             "bStateSave": true,
@@ -135,7 +135,7 @@
         });
 
         // Inisialisasi ulang Bootstrap Switch dan pengikatan event handler saat tabel di-render ulang
-        tableTestimonils.on('draw.dt', function() {
+        tableTestimoni.on('draw.dt', function() {
             var lightbox = GLightbox({
                 selector: '.glightbox'
             });
@@ -176,33 +176,44 @@
             });
         });
 
-        function resetModal() {
-            if (gbrTestimoniDropzone) {
-                gbrTestimoniDropzone.removeAllFiles();
-            }
-        }
-
-        var gbrTestimoniDropzone = new Dropzone("#gbrTestimoni", {
+        var testimoniImageDropzone = new Dropzone("#sliderImage", {
             url: "<?= base_url('admin/save_testimonials'); ?>",
-            maxFiles: null,
             acceptedFiles: 'image/*',
             addRemoveLinks: true,
+            maxFiles: 1,
             dictDefaultMessage: "Seret gambar ke sini untuk unggah",
             autoProcessQueue: false,
-            resizeQuality: 0.6,
-            parallelUploads: 10,
-
-            checkOrientation: true,
-            maxWidth: 8192,
-            maxHeight: 8192,
-            quality: 0.5,
             init: function() {
                 var dz = this;
-
-                $("#TestimonialsUploadForm").on("submit", function(e) {
-                    e.preventDefault();
-                    dz.processQueue();
+                this.on("addedfile", function(file) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        var cropContainer = document.getElementById('cropContainer');
+                        var cropImage = document.getElementById('cropImage');
+                        cropContainer.style.display = 'flex';
+                        cropImage.src = event.target.result;
+                        if (cropper) {
+                            cropper.destroy();
+                        }
+                        cropper = new Cropper(cropImage, {
+                            viewMode: 1,
+                            responsive: true,
+                            scalable: true,
+                            zoomable: true,
+                            autoCropArea: 0.5, // Set initial cropping area
+                            movable: true,
+                            cropBoxResizable: true,
+                            toggleDragModeOnDblclick: false // Disable toggle drag mode on double click
+                        });
+                    };
+                    reader.readAsDataURL(file);
                 });
+
+                this.on("sending", function(file, xhr, formData) {
+                    var status = $("input[name='status-toggle']").val();
+                    formData.append("status", status);
+                });
+
                 this.on("success", function(file, response) {
                     Swal.fire({
                         icon: 'success',
@@ -213,7 +224,7 @@
                     }).then((result) => {
                         $('#addNewTestimonial').modal('hide');
                         resetModal();
-                        tableTestimonils.ajax.reload(null, false); // Reload data table
+                        tableTestimoni.ajax.reload(null, false);
                     });
                 });
 
@@ -221,6 +232,42 @@
                     resetModal();
                 });
             }
+        });
+
+        var cropper;
+
+        function resetModal() {
+            var cropContainer = document.getElementById('cropContainer');
+            var cropImage = document.getElementById('cropImage');
+
+            if (cropContainer) {
+                cropContainer.style.display = 'none';
+            }
+            if (cropImage) {
+                cropImage.src = '';
+            }
+
+            if (testimoniImageDropzone) {
+                testimoniImageDropzone.removeAllFiles();
+            }
+        }
+
+        document.getElementById('cropBtn').addEventListener('click', function() {
+            var croppedCanvas = cropper.getCroppedCanvas({
+                width: 1000,
+                height: 1000,
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high'
+            });
+
+            croppedCanvas.toBlob(function(blob) {
+                var croppedFile = new File([blob], "cropped_image.jpg", {
+                    type: "image/webp"
+                });
+                testimoniImageDropzone.removeAllFiles();
+                testimoniImageDropzone.addFile(croppedFile);
+                testimoniImageDropzone.processQueue();
+            }, 'image/webp');
         });
 
         $('#tabelTestimoni').on('click', '.delete-testimoni', function() {
@@ -251,7 +298,7 @@
                                 timerProgressBar: true,
                                 showConfirmButton: false // Hide the default "OK" button
                             }).then(() => {
-                                tableTestimonils.ajax.reload(null, false);
+                                tableTestimoni.ajax.reload(null, false);
                             });
                         },
                         error: function() {

@@ -1,6 +1,7 @@
 <?= $this->extend('admin/template') ?>
 <?= $this->section('content') ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+
+
 <div class="main_content_iner ">
     <div class="container-fluid plr_30 body_white_bg pt_30">
         <div class="row justify-content-center">
@@ -38,37 +39,36 @@
 
 <!-- Modal Tambah Kategori -->
 <div class="modal fade" id="addProductCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addProductCategoryLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="addProductCategoryLabel">Tambah Produk Baru</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <?= csrf_field() ?>
-                <div class="mb-3">
-                    <label for="nama" class="form-label">Nama Produk</label>
-                    <input type="text" class="form-control" id="nama" name="nama" value="<?= old('nama') ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="harga">Harga Produk</label>
-                    <input class="form-control" type="text" name="harga" id="harga" required>
-                </div>
+                <form id="uploadForm" method="POST">
+                    <?= csrf_field() ?>
+                    <div class="mb-3">
+                        <span>Gambar Produk</span>
+                        <div class="dropzone" id="gambarKategori"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama Produk</label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="<?= old('nama') ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="harga">Harga Produk</label>
+                        <input class="form-control" type="text" name="harga" id="harga" required>
+                    </div>
 
-                <div class="mb-3">
-                    <input class="form-control" type="hidden" name="is_popular" id="is_popular" value="0">
-                </div>
-                <div class="mb-3">
-                    <span>Gambar Produk</span>
-                    <form action="<?= base_url('admin/save_products') ?>" class="dropzone" id="addProduct"></form>
-                </div>
-                <div style="max-height: 400px; display: none;" id="cropContainer">
-                    <img id="cropImage">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button class="btn btn-pink" id="addCropBtn">Crop & Unggah Slider</button>
-                </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="hidden" name="is_popular" id="is_popular" value="0">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-pink">Unggah Produk</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -83,59 +83,52 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <?= csrf_field() ?>
-                <input type="hidden" id="editId" name="id">
-                <div class="mb-3">
-                    <label for="editNama" class="form-label">Nama Produk</label>
-                    <input type="text" class="form-control" id="editNama" name="nama" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="harga">Harga Produk</label>
-                    <input class="form-control" type="text" name="harga" id="editHarga">
-                </div>
-                <div class="mb-3">
-                    <input class="form-control" type="hidden" name="is_popular" id="editIsPopular" value="0">
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="mb-3">
-                            <span>Gambar Produk Sekarang</span>
-                            <div class="current-image mb-3">
-                                <img id="currentImage" class="w-75" src="" alt="Kategori Image">
+                <form id="editForm" method="POST">
+                    <?= csrf_field() ?>
+                    <input type="hidden" id="editId" name="id">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <span>Gambar Produk Sekarang</span>
+                                <div class="current-image mb-3">
+                                    <img id="currentImage" class="w-75" src="" alt="Kategori Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <span>Gambar Baru Produk</span>
+                                <div class="dropzone dzpink" id="editGambarKategori"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="mb-3">
-                            <span>Gambar Produk</span>
-                            <form action="<?= base_url('admin/update_products') ?>" class="dropzone" id="editProduct"></form>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div style="max-height: 400px; display: none;" id="editcropContainer">
-                            <img id="editcropImage">
-                        </div>
-                    </div>
-                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button class="btn btn-pink" id="editCropBtn">Crop & Unggah Slider</button>
-                </div>
+                    <div class="mb-3">
+                        <label for="editNama" class="form-label">Nama Produk</label>
+                        <input type="text" class="form-control" id="editNama" name="nama" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="harga">Harga Produk</label>
+                        <input class="form-control" type="text" name="harga" id="editHarga">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="hidden" name="is_popular" id="editIsPopular" value="0">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-ubah">Perbarui Produk</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     Dropzone.autoDiscover = false;
-
     $(document).ready(function() {
 
         var tableProducts = $('#tabelProduk').DataTable({
@@ -301,11 +294,13 @@
                                     icon: 'success',
                                     title: 'Berhasil!',
                                     text: 'Produk telah dihapus.',
-                                    timer: 1000,
+                                    timer: 1000, // Auto-close after 3 seconds
                                     timerProgressBar: true,
-                                    showConfirmButton: false
+                                    showConfirmButton: false // Hide the default "OK" button
                                 }).then(() => {
-                                    tableProducts.ajax.reload(null, false);
+                                    tableProducts.ajax
+                                        .reload(null,
+                                            false);
                                 });
 
                             } else {
@@ -328,86 +323,73 @@
             });
         }
 
-        // Add New Product
-        var addDropzone = new Dropzone("#addProduct", {
-            url: "<?= base_url('admin/save_products'); ?>",
-            acceptedFiles: 'image/*',
-            addRemoveLinks: true,
+
+        // Dropzone for Add Category
+        const addDropzone = new Dropzone("#gambarKategori", {
+            url: "<?= base_url('admin/save_products') ?>",
+            autoProcessQueue: false,
+            uploadMultiple: false,
             maxFiles: 1,
             dictDefaultMessage: "Seret gambar ke sini untuk unggah",
-            autoProcessQueue: false,
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
             init: function() {
-                var dz = this;
-                this.on("addedfile", function(file) {
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        var cropContainer = document.getElementById('cropContainer');
-                        var cropImage = document.getElementById('cropImage');
-                        cropContainer.style.display = 'flex';
-                        cropImage.src = event.target.result;
-                        if (cropper) {
-                            cropper.destroy();
-                        }
-                        cropper = new Cropper(cropImage, {
-                            viewMode: 1,
-                            aspectRatio: 1 / 1,
-                            responsive: true,
-                            scalable: true,
-                            zoomable: true,
-                            autoCropArea: 0.5,
-                            movable: true,
-                            cropBoxResizable: true,
-                            toggleDragModeOnDblclick: false
-                        });
-                    };
-                    reader.readAsDataURL(file);
+                var addDropzone = this;
+                document.querySelector("#uploadForm").addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (addDropzone.getQueuedFiles().length > 0) {
+                        addDropzone.processQueue();
+                    } else {
+                        Swal.fire('Error', 'Gambar produk belum diunggah.', 'error');
+                    }
                 });
-
                 this.on("sending", function(file, xhr, formData) {
                     formData.append("nama", document.querySelector("#nama").value);
                     formData.append("harga", document.querySelector("#harga").value);
                     formData.append("is_popular", document.querySelector("#is_popular")
                         .value);
                 });
-
                 this.on("success", function(file, response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Upload Berhasil',
-                        timer: 1000,
-                        timerProgressBar: true,
-                        showConfirmButton: false
-                    }).then((result) => {
-                        $('#addProductCategory').modal('hide');
-                        resetModal();
-                        tableProducts.ajax.reload(null, false);
-                    });
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Produk baru telah diunggah.',
+                            timer: 1000, // Auto-close after 3 seconds
+                            timerProgressBar: true,
+                            showConfirmButton: false // Hide the default "OK" button
+                        }).then(() => {
+                            $('#addProductCategory').modal('hide');
+                            resetModal();
+                            tableProducts.ajax
+                                .reload(null,
+                                    false);
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.errors ? response.errors.join("<br>") : 'Gagal unggah produk baru.',
+                        });
+                    }
                 });
-
-                this.on("queuecomplete", function() {
-                    resetModal();
+                this.on("error", function(file, response) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Gagal unggah produk baru.',
+                        timer: 1000, // Auto-close after 3 seconds
+                        timerProgressBar: true,
+                        showConfirmButton: false // Hide the default "OK" button
+                    });
                 });
             }
         });
 
-        var cropper;
-
         function resetModal() {
-            var cropContainer = document.getElementById('cropContainer');
-            var cropImage = document.getElementById('cropImage');
             var nama = document.getElementById('nama');
             var harga = document.getElementById('harga');
-
-            if (cropContainer) {
-                cropContainer.style.display = 'none';
-            }
-            if (cropImage) {
-                cropImage.src = '';
-            }
-
-            if (addDropzone) {
-                addDropzone.removeAllFiles();
-            }
 
             if (nama) {
                 nama.value = '';
@@ -423,60 +405,74 @@
             }
         }
 
-        document.getElementById('addCropBtn').addEventListener('click', function() {
-            var croppedCanvas = cropper.getCroppedCanvas({
-                width: 1000,
-                height: 1000,
-                imageSmoothingEnabled: true,
-                imageSmoothingQuality: 'high'
-            });
-
-            croppedCanvas.toBlob(function(blob) {
-                var croppedFile = new File([blob], "cropped_image.jpg", {
-                    type: "image/webp"
-                });
-                addDropzone.removeAllFiles();
-                addDropzone.addFile(croppedFile);
-                addDropzone.processQueue();
-            }, 'image/webp');
-        });
-
-
         //dropzone edit produk
-        var editDropzone = new Dropzone("#editProduct", {
-            url: "<?= base_url('admin/update_products'); ?>",
+        const editDropzone = new Dropzone("#editGambarKategori", {
+            url: "<?= base_url('admin/update_products') ?>",
+            autoProcessQueue: false,
+            uploadMultiple: false,
+            maxFiles: 1,
             acceptedFiles: 'image/*',
             addRemoveLinks: true,
-            maxFiles: 1,
-            dictDefaultMessage: "Seret gambar ke sini untuk unggah",
-            autoProcessQueue: false,
             init: function() {
-                var dz = this;
-                this.on("addedfile", function(file) {
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        var editcropContainer = document.getElementById('editcropContainer');
-                        var editcropImage = document.getElementById('editcropImage');
-                        editcropContainer.style.display = 'flex';
-                        editcropImage.src = event.target.result;
-                        if (cropper) {
-                            cropper.destroy();
-                        }
-                        cropper = new Cropper(editcropImage, {
-                            viewMode: 1,
-                            aspectRatio: 1 / 1,
-                            responsive: true,
-                            scalable: true,
-                            zoomable: true,
-                            autoCropArea: 0.5,
-                            movable: true,
-                            cropBoxResizable: true,
-                            toggleDragModeOnDblclick: false
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                });
+                var editDropzone = this;
+                document.querySelector("#editForm").addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (editDropzone.getQueuedFiles().length > 0) {
+                        editDropzone.processQueue();
+                    } else {
+                        var formData = new FormData();
+                        formData.append("id", document.querySelector("#editId").value);
+                        formData.append("nama", document.querySelector("#editNama").value);
+                        formData.append("harga", document.querySelector("#editHarga").value);
+                        formData.append("is_popular", document.querySelector("#editIsPopular")
+                            .value);
 
+                        fetch("<?= base_url('admin/update_products') ?>", {
+                                method: "POST",
+                                body: formData
+                            })
+                            .then(response => response.json())
+                            .then(response => {
+                                if (response.success) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Berhasil',
+                                        text: 'Produk telah diperbarui.',
+                                        timer: 1000, // Auto-close after 3 seconds
+                                        timerProgressBar: true,
+                                        showConfirmButton: false // Hide the default "OK" button
+                                    }).then(() => {
+                                        $('#editProductModal').modal('hide');
+                                        resetModal();
+                                        tableProducts.ajax
+                                            .reload(null,
+                                                false);
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal',
+                                        text: response.errors ? Object.values(
+                                            response.errors).join("<br>") : 'Produk belum diperbarui.',
+                                        timer: 1000, // Auto-close after 3 seconds
+                                        timerProgressBar: true,
+                                        showConfirmButton: false // Hide the default "OK" button
+                                    });
+                                }
+                            })
+                            .catch(() => {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: 'Produk belum diperbarui.',
+                                    timer: 1000, // Auto-close after 3 seconds
+                                    timerProgressBar: true,
+                                    showConfirmButton: false // Hide the default "OK" button
+                                });
+                            });
+                    }
+                });
                 this.on("sending", function(file, xhr, formData) {
                     formData.append("id", document.querySelector("#editId").value);
                     formData.append("nama", document.querySelector("#editNama").value);
@@ -487,76 +483,42 @@
                         formData.append("file", file);
                     }
                 });
-
-                this.on("success", function(file, response) {
+                // this.on("success", function(file, response) {
+                //     if (response.success) {
+                //         Swal.fire({
+                //             icon: 'success',
+                //             title: 'Berhasil',
+                //             text: 'Produk telah diperbarui.',
+                //             timer: 1000, // Auto-close after 3 seconds
+                //             timerProgressBar: true,
+                //             showConfirmButton: false // Hide the default "OK" button
+                //         }).then(() => {
+                //             $('#editProductModal').modal('hide');
+                //             tableProducts.ajax
+                //                 .reload(null,
+                //                     false);
+                //         });
+                //     } else {
+                //         Swal.fire({
+                //             icon: 'error',
+                //             title: 'Error',
+                //             text: response.errors ? Object.values(response.errors).join(
+                //                 "<br>") : 'Produk belum diperbarui.',
+                //         });
+                //     }
+                // });
+                this.on("error", function(file, response) {
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Upload Berhasil',
-                        timer: 1000,
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Produk belum diperbarui.',
+                        timer: 1000, // Auto-close after 3 seconds
                         timerProgressBar: true,
-                        showConfirmButton: false
-                    }).then((result) => {
-                        $('#editProductModal').modal('hide');
-                        resetEditModal();
-                        tableProducts.ajax.reload(null, false);
+                        showConfirmButton: false // Hide the default "OK" button
                     });
                 });
-
-                this.on("queuecomplete", function() {
-                    resetEditModal();
-                });
             }
         });
-
-
-        var cropper;
-
-        function resetEditModal() {
-            var editcropContainer = document.getElementById('editcropContainer');
-            var editCropImage = document.getElementById('editCropImage');
-            var editNama = document.getElementById('editNama');
-            var editHarga = document.getElementById('editHarga');
-
-            if (editcropContainer) {
-                editcropContainer.style.display = 'none';
-            }
-            if (editCropImage) {
-                editCropImage.src = '';
-            }
-
-            if (addDropzone) {
-                addDropzone.removeAllFiles();
-            }
-
-            if (editNama) {
-                editNama.value = '';
-            }
-            if (editHarga) {
-                editHarga.value = '';
-            }
-            if (editDropzone) {
-                editDropzone.removeAllFiles();
-            }
-        }
-
-        document.getElementById('editCropBtn').addEventListener('click', function() {
-            var croppedCanvas = cropper.getCroppedCanvas({
-                width: 1000,
-                height: 1000,
-                imageSmoothingEnabled: true,
-                imageSmoothingQuality: 'high'
-            });
-
-            croppedCanvas.toBlob(function(blob) {
-                var croppedFile = new File([blob], "cropped_image.jpg", {
-                    type: "image/webp"
-                });
-                editDropzone.removeAllFiles();
-                editDropzone.addFile(croppedFile);
-                editDropzone.processQueue();
-            }, 'image/webp');
-        });
-
 
         function formatRupiah(angka, prefix) {
             var number_string = angka.replace(/[^,\d]/g, '').toString(),

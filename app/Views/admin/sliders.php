@@ -52,10 +52,10 @@
                 <div style="max-height: 400px; display: none;" id="cropContainer">
                     <img id="cropImage">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button class="btn btn-pink" id="cropBtn">Crop & Unggah Slider</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button class="btn btn-pink" id="cropBtn">Crop & Unggah Slider</button>
             </div>
         </div>
     </div>

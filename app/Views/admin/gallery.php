@@ -14,7 +14,10 @@
                     <div class="white_box_tittle list_header">
                         <h4>Tabel Galeri</h4>
                         <div class="box_right d-flex lms_block">
-                            <div class="btn-group add_button ms-2">
+                            <div class="add_button ms-2">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#addGalleryCroping" class="btn_1">Tambah Galeri Baru</a>
+                            </div>
+                            <!-- <div class="btn-group add_button ms-2">
                                 <button type="button" class="btn btn_1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Tambah Galeri Baru
                                 </button>
@@ -22,7 +25,7 @@
                                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addGaleriMasal">Upload Masal</a></li>
                                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addGalleryCroping">Upload & Cropping</a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="QA_table ">

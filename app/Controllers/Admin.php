@@ -139,7 +139,7 @@ class Admin extends BaseController
         $file = $this->request->getFile('file');
         if ($file->isValid() && !$file->hasMoved()) {
             // $newName = $file->getRandomName();
-            $newName = url_title($this->request->getPost('nama'), '-', true).'-'.$file->getRandomName().'.'.$file->guessExtension();
+            $newName = url_title($this->request->getPost('nama'), '-', true) . '-' . $file->getRandomName() . '.' . $file->guessExtension();
             $file->move(FCPATH . 'uploads/products/', $newName);
 
             $categoryModel = new ProductsModel();
@@ -188,7 +188,7 @@ class Admin extends BaseController
         $file = $this->request->getFile('file');
         if ($file && $file->isValid() && !$file->hasMoved()) {
             // $newName = $file->getRandomName();
-            $newName = url_title($this->request->getPost('nama'), '-', true).'-'.$file->getRandomName().'.'.$file->guessExtension();
+            $newName = url_title($this->request->getPost('nama'), '-', true) . '-' . $file->getRandomName() . '.' . $file->guessExtension();
             $file->move(FCPATH . 'uploads/products/', $newName);
 
             // Hapus gambar lama jika ada
@@ -249,7 +249,7 @@ class Admin extends BaseController
 
         if ($file && $file->isValid() && !$file->hasMoved()) {
             // $imgName = $file->getRandomName();
-            $imgName = url_title($this->request->getPost('kategori'), '-', true).'-'.$file->getRandomName().'.'.$file->guessExtension();
+            $imgName = url_title($this->request->getPost('kategori'), '-', true) . '-' . $file->getRandomName() . '.' . $file->guessExtension();
             $file->move('uploads/gallery/', $imgName);
 
             $data = [
@@ -481,14 +481,16 @@ class Admin extends BaseController
 
         $testimonial = $model->find($id);
         if ($testimonial) {
-            unlink('uploads/testimonials/' . $testimonial['gambar']); // perbaiki path penghapusan file
+            $filePath = 'uploads/testimonials/' . $testimonial['gambar'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
             $model->delete($id);
-            return $this->response->setJSON(['success' => 'Testimonial deleted successfully']);
+            return $this->response->setJSON(['success' => 'Testimoni berhasil dihapus!']);
         }
 
-        return $this->response->setJSON(['error' => 'Testimonial not found']);
+        return $this->response->setJSON(['error' => 'Testimoni tidak ditemukan!']);
     }
-
 
     private function loadView(string $viewName, array $data = []): string
     {
