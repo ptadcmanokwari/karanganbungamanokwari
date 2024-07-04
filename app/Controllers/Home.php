@@ -86,7 +86,7 @@ class Home extends BaseController
         $gallery = new GalleryModel();
         $data['galeri'] = $gallery->getGallery(1, NULL);
 
-        $data['kategori_galeri'] = $gallery->getGalleryCategory();
+        $data['kategori_galeri'] = $gallery->getGalleryCategory(); 
 
         echo view('home/gallery', $data);
     }

@@ -17,7 +17,6 @@ class Admin extends BaseController
 
     public function __construct()
     {
-        // parent::__construct();
         $settings = new SettingsModel();
         $this->logo = $settings->getSettings('logo')->getRow()->nilai;
     }
@@ -29,7 +28,6 @@ class Admin extends BaseController
         return $this->loadView('admin/dashboard', $data);
     }
 
-    // Slider
     public function sliders(): string
     {
         $data['title'] = 'Pengaturan Slider';
@@ -109,17 +107,22 @@ class Admin extends BaseController
 
     public function deleteProduct()
     {
-        $request = $this->request->getPost();
-        $id = $request['id'];
+        
+        $model = new ProductsModel();
+        $id = $this->request->getPost('id');
 
-        $productsModel = new ProductsModel();
-        $delete = $productsModel->delete($id);
-
-        if ($delete) {
-            return $this->response->setJSON(['status' => 'success']);
-        } else {
-            return $this->response->setJSON(['status' => 'error']);
+        $product = $model->find($id);
+        if ($product) {
+            $filePath = 'uploads/products/' . $product['gambar'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+            $model->delete($id);
+            return $this->response->setJSON(['success' => 'Product deleted successfully']);
         }
+
+        return $this->response->setJSON(['error' => 'Product not found']);
+
     }
 
     public function save_products()
@@ -138,8 +141,7 @@ class Admin extends BaseController
 
         $file = $this->request->getFile('file');
         if ($file->isValid() && !$file->hasMoved()) {
-            // $newName = $file->getRandomName();
-            $newName = url_title($this->request->getPost('nama'), '-', true) . '-' . $file->getRandomName() . '.' . $file->guessExtension();
+            $newName = url_title($this->request->getPost('nama'), '-', true) . '-' . $file->getRandomName();
             $file->move(FCPATH . 'uploads/products/', $newName);
 
             $categoryModel = new ProductsModel();
@@ -249,7 +251,7 @@ class Admin extends BaseController
 
         if ($file && $file->isValid() && !$file->hasMoved()) {
             // $imgName = $file->getRandomName();
-            $imgName = url_title($this->request->getPost('kategori'), '-', true) . '-' . $file->getRandomName() . '.' . $file->guessExtension();
+            $imgName = url_title($this->request->getPost('kategori'), '-', true) . '-' . $file->getRandomName();
             $file->move('uploads/gallery/', $imgName);
 
             $data = [

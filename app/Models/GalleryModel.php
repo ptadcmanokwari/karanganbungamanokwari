@@ -29,7 +29,7 @@ class GalleryModel extends Model
     public function getGalleryCategory()
     {
         $builder = $this->db->table('t_gallery');
-        $builder->orderBy('kategori', 'desc');
+        $builder->orderBy('kategori', 'asc');
         $builder->select('kategori');
         $builder->distinct();
         return $builder->get()->getResultArray();
